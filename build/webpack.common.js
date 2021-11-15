@@ -3,24 +3,27 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-    entry : {
+    entry: {
     },
-    output : {
-        path : commonPaths.outputPath,
-        publicPath : '/'
+    output: {
+        path: commonPaths.outputPath,
+        publicPath: '/'
     },
-    module : {
-        rules : [
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js']
+    },
+    module: {
+        rules: [
             {
-                test : /\.(js)$/,
-                exclude : /node_modules/,
-                use : ['babel-loader']
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: ['ts-loader']
             }
         ]
     },
-    plugins : [
+    plugins: [
         new HtmlWebpackPlugin({
-            template : 'public/index.html',
+            template: 'public/index.html',
             //favicon : 'public/favicon.ico'
         }),
     ]

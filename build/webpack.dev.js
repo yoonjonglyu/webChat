@@ -3,41 +3,41 @@ const webpack = require('webpack');
 const port = process.env.PORT || 38888;
 
 const config = {
-    mode : 'development',
-    entry : {
-        app : `${commonPaths.appEntry}/index.js`
+    mode: 'development',
+    entry: {
+        app: `${commonPaths.appEntry}/index.tsx`
     },
-    output : {
-        filename : '[name].[hash].js'
+    output: {
+        filename: '[name].[hash].js'
     },
-    devtool : 'eval',
-    module : {
-        rules : [
+    devtool: 'eval',
+    module: {
+        rules: [
             {
-                test : /\.(png|jpe?g|git)$/,
-                loader : 'file-loader',
-                options : {
-                    name : `[contenthash].[ext]`,
+                test: /\.(png|jpe?g|git)$/,
+                loader: 'file-loader',
+                options: {
+                    name: `[contenthash].[ext]`,
                 }
             },
             {
-                test : /\.css$/,
-                use : [
+                test: /\.css$/,
+                use: [
                     {
-                        loader : 'style-loader'
+                        loader: 'style-loader'
                     },
                     {
-                        loader : 'css-loader',
-                        options : {
-                            modules : true,
-                            sourceMap : true
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            sourceMap: true
                         }
                     }
                 ]
             }
         ]
     },
-    plugins : [
+    plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: { // 웹팩서버
@@ -46,7 +46,7 @@ const config = {
         historyApiFallback: true,
         open: true,
         hot: true
-      }
+    }
 }
 
 module.exports = config;
