@@ -2,7 +2,7 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
-
+const { defaults } = require('jest-config');
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -72,6 +72,7 @@ module.exports = {
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
+    ...defaults.moduleFileExtensions,
     "js",
     "jsx",
     "ts",
@@ -130,8 +131,9 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
-
+  setupFilesAfterEnv: [
+    '<rootDir>/test/jest.setup',
+  ],
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
 
@@ -175,7 +177,8 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "\\.js$": "babel-jest",
+    '^.+\\.(js|jsx)?$': 'babel-jest',
+    '^.+\\.(ts|tsx)?$': 'ts-jest',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
