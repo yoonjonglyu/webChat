@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
 
+import App from './app';
+
 function render(App: React.FC) {
     ReactDOM.render(
         <RecoilRoot>
@@ -11,4 +13,4 @@ function render(App: React.FC) {
     );
 }
 
-render(() => <div> hi</div>);
+render(App);
