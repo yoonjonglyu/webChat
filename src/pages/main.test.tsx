@@ -9,6 +9,7 @@ describe('메인 라우트 시작점', () => {
         
         expect(screen.getByRole('header')).toHaveTextContent('WebChat');
         expect(screen.getByRole('main')).toBeVisible();
+        expect(screen.getByRole('main')).toHaveTextContent('채팅창 구현하기');
         expect(screen.getByRole('footer')).toHaveTextContent('Copyright 2021. 류윤종 All Right Reserve.');
         expect(screen.getByText('메인')).toBeInTheDocument();
     });
