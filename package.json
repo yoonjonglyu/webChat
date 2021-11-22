@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --progress --env env=prod",
     "build:bundleanalyzer": "npm run build -- --env addons=bundleanalyzer",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --detectOpenHandles"
   },
   "repository": {
     "type": "git",
