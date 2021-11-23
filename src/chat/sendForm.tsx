@@ -15,11 +15,11 @@ const SendForm: React.FC<SendFormProps> = (props) => {
         e.preventDefault();
         if (message.length > 0) {
             socket.emit('send', message);
+            setMessage('');
         }
     }
     const handleMsg = (e: any) => {
         setMessage(e.target.value);
-        e.target.value = '';
     }
 
     return (
