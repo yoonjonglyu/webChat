@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 
 import SendForm from './sendForm';
 
-describe('webChat 채팅창', () => {
+describe('sendForm 채팅 메시지 입력 폼', () => {
     let socket: any;
     beforeAll((done) => {
         socket = io('http://localhost:7778/webChat', {
