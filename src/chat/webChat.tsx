@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
+import SendForm from './sendForm';
+
 interface WebChatProps {
 
 }
@@ -49,40 +51,11 @@ const WebChat: React.FC<WebChatProps> = () => {
             </div>
         );
     }
-    const Send = (props: any) => {
-        const {
-            socket
-        } = props;
-        const [message, setMessage] = useState('');
-
-        const sendMessage = (e: any) => {
-            e.preventDefault();
-            if (message.length > 0) {
-                socket.emit('send', message);
-            }
-        }
-        const handleMsg = (e: any) => {
-            setMessage(e.target.value);
-            e.target.value = '';
-        }
-
-        return (
-            <form className="chat-form" onSubmit={sendMessage}>
-                <input
-                    type="text"
-                    className="chat-input"
-                    value={message}
-                    onChange={handleMsg}
-                />
-                <button type="button" className="chat-request" onClick={sendMessage}>전송</button>
-            </form>
-        );
-    }
 
     return (
         <article>
             <Log socket={socket} />
-            <Send socket={socket} />
+            <SendForm socket={socket} />
             채팅창 구현하기
         </article >
     );
