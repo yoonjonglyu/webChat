@@ -15,7 +15,7 @@ describe('webChat 채팅창', () => {
     afterAll(() => {
         socket.close();
     });
-    test('render', (done) => {
+    test('render', () => {
         const { container } = render(
             <WebChat />
         );
@@ -28,10 +28,17 @@ describe('webChat 채팅창', () => {
         expect(chatInput?.querySelector('.chat-input')).toBeVisible();
         expect(chatInput?.querySelector('.chat-request')).toHaveTextContent('전송')
         expect(screen.getByText('채팅창 구현하기')).toBeVisible();
+    });
+
+    test('socket', (done) => {
         socket.on('room', (rooms: any) => {
             expect(rooms).toBeEnabled();
             done();
         });
-        done();
+        socket.on('receive', (msg: string) => {
+            expect(msg).toBe('테스트용 메시지 입니다.');
+            done();
+        });
+        socket.emit('send', '테스트용 메시지 입니다.');
     });
 });
