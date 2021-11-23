@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
 import SendForm from './sendForm';
+import ChatRoom from './chatRoom';
 
 interface WebChatProps {
 
@@ -34,27 +35,9 @@ const WebChat: React.FC<WebChatProps> = () => {
         socket.emit('join', roomIdx);
     }
 
-    const Log = (props: any) => {
-        const {
-            socket
-        } = props;
-        const [chatLog, setChatLog] = useState<Array<any>>([]);
-        socket.on('receive', (msg: any) => {
-            const state = Array.from(chatLog);
-            state.push(msg);
-            setChatLog(state);
-        });
-
-        return (
-            <div className="chat-room">
-                {chatLog.map((msg: any, idx: any) => <p key={idx}>{msg}</p>)}
-            </div>
-        );
-    }
-
     return (
         <article>
-            <Log socket={socket} />
+            <ChatRoom socket={socket} />
             <SendForm socket={socket} />
             채팅창 구현하기
         </article >
