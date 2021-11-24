@@ -47,7 +47,6 @@ const WebChat: React.FC<WebChatProps> = () => {
         }}>
             <ChatRoom socket={socket} />
             <SendForm socket={socket} />
-            채팅창 구현하기
         </article >
     );
 }

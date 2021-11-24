@@ -27,7 +27,6 @@ describe('webChat 채팅창', () => {
         expect(chatInput).toBeVisible();
         expect(chatInput?.querySelector('.chat-input')).toBeVisible();
         expect(chatInput?.querySelector('.chat-request')).toHaveTextContent('전송')
-        expect(screen.getByText('채팅창 구현하기')).toBeVisible();
     });
 
     test('socket', (done) => {
