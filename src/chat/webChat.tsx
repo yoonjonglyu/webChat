@@ -36,7 +36,15 @@ const WebChat: React.FC<WebChatProps> = () => {
     }
 
     return (
-        <article>
+        <article style={{
+            display: "flex",
+            flexFlow: "column wrap",
+            justifyContent: "center",
+            width: "80%",
+            height: "auto",
+            padding: "12px",
+            border: "1px solid"
+        }}>
             <ChatRoom socket={socket} />
             <SendForm socket={socket} />
             채팅창 구현하기
