@@ -17,7 +17,16 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     });
 
     return (
-        <div className="chat-room">
+        <div
+            className="chat-room"
+            style={{
+                display: "flex",
+                flexFlow: "column nowrap",
+                flex: "1 0px",
+                border: "1px solid",
+                overflow: "auto",
+            }}
+        >
             {chatLog.map((msg: any, idx: any) => <p key={idx}>{msg}</p>)}
         </div>
     );
