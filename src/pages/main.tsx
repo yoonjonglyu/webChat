@@ -10,7 +10,6 @@ interface MainProps {
 const Main: React.FC<MainProps> = () => {
     return (
         <Layout>
-            메인
             <WebChat />
         </Layout>
     );
