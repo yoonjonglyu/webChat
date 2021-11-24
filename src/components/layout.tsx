@@ -30,7 +30,7 @@ const Logo = StyledComponents.h1`
 const Main = StyledComponents.main`
     display: flex;
     justify-content: center;
-    flex-basis: 90vh;
+    flex: 1 90vh;
 `;
 const Footer = StyledComponents.footer`
     display: flex;
