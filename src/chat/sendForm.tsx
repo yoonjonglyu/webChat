@@ -23,14 +23,43 @@ const SendForm: React.FC<SendFormProps> = (props) => {
     }
 
     return (
-        <form className="chat-form" onSubmit={sendMessage}>
+        <form
+            className="chat-form"
+            onSubmit={sendMessage}
+            style={{
+                display: "flex",
+                flexFlow: "row",
+                justifyContent: "center",
+                padding: "6px",
+                background: "#DFD8CA",
+                border: "1px solid"
+            }}
+        >
             <input
                 type="text"
                 className="chat-input"
                 value={message}
                 onChange={handleMsg}
+                style={{
+                    flex: "3 0px",
+                    margin: "3px 3px 0 0"
+                }}
             />
-            <button type="button" className="chat-request" onClick={sendMessage}>전송</button>
+            <button
+                type="button"
+                className="chat-request"
+                onClick={sendMessage}
+                style={{
+                    margin: "3px 0 0 0",
+                    padding: "6px 12px",
+                    color: "#FBF3E4",
+                    background: "#105652",
+                    border: "0",
+                    borderRadius: "3px",
+                }}
+            >
+                전송
+            </button>
         </form>
     );
 }
