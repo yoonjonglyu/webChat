@@ -14,12 +14,10 @@ const WebChat: React.FC<WebChatProps> = () => {
     });;
 
     socket.on('connect', async () => {
-        if (socket.connected) {
-            socket.emit('init', socket.id);
-            socket.on('room', (rooms: any) => {
+        if (socket.connected) socket.emit('init', socket.id);
+    });
+    socket.on('room', (rooms: any) => {
 
-            });
-        }
     });
     socket.on('disconnect', () => {
 
