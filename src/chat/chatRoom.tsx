@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Socket } from 'socket.io-client';
 
 interface ChatRoomProps {
@@ -9,11 +9,13 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     const {
         socket
     } = props;
-    const [chatLog, setChatLog] = useState<Array<any>>([]);
+    const room = useRef(null);
     socket.on('receive', (msg: any) => {
-        const state = Array.from(chatLog);
-        state.push(msg);
-        setChatLog(state);
+        const MessageNode = document.createElement('p');
+        MessageNode.innerText = msg;
+        const root: any = room.current;
+        root.appendChild(MessageNode);
+        // 리덕스 사가 같은 비동기 작업을 대신 처리할 상태관리 로직이 필요하다.
     });
 
     return (
@@ -26,8 +28,8 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 border: "1px solid",
                 overflow: "auto",
             }}
+            ref={room}
         >
-            {chatLog.map((msg: any, idx: any) => <p key={idx}>{msg}</p>)}
         </div>
     );
 }
