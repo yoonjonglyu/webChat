@@ -34,10 +34,18 @@ describe('webChat 채팅창', () => {
             expect(rooms).toBeEnabled();
             done();
         });
-        socket.on('receive', (msg: string) => {
-            expect(msg).toBe('테스트용 메시지 입니다.');
+        socket.on('receive', (msg: {
+            socketIdx: string,
+            message: string,
+            room: string
+        }) => {
+            expect(msg.message).toBe('테스트용 메시지 입니다.');
             done();
         });
-        socket.emit('send', '테스트용 메시지 입니다.');
+        socket.emit('send', {
+            socketIdx: socket.id,
+            message: '테스트용 메시지 입니다.',
+            room: '#1'
+        });
     });
 });
