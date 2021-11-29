@@ -10,9 +10,9 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         socket
     } = props;
     const room = useRef(null);
-    socket.on('receive', (msg: any) => {
+    socket.on('receive', (data: { idx: number, message: string }) => {
         const MessageNode = document.createElement('p');
-        MessageNode.innerText = msg;
+        MessageNode.innerText = data.message;
         const root: any = room.current;
         root.appendChild(MessageNode);
         // 리덕스 사가 같은 비동기 작업을 대신 처리할 상태관리 로직이 필요하다.

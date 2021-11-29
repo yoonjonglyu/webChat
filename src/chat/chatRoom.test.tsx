@@ -20,10 +20,16 @@ describe('chatRoom 채팅 메시지 보기', () => {
         render(
             <ChatRoom socket={socket} />
         );
-        socket.on('receive', (msg: string) => {
-            expect(msg).toBe('메시지 수신 테스트');
+        socket.on('receive', (msg: {
+            socketIdx: string,
+            message: string
+        }) => {
+            expect(msg.message).toBe('메시지 수신 테스트');
             done();
         });
-        socket.emit('send', '메시지 수신 테스트');
+        socket.emit('send', {
+            socketIdx: socket.id,
+            message: '메시지 수신 테스트'
+        });
     });
 });
