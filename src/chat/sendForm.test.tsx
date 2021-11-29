@@ -20,10 +20,18 @@ describe('sendForm 채팅 메시지 입력 폼', () => {
         render(
             <SendForm socket={socket} />
         );
-        socket.on('receive', (msg: string) => {
-            expect(msg).toBe('메시지 전송 테스트');
+        socket.on('receive', (msg: {
+            socketIdx: string,
+            message: string,
+            room: string
+        }) => {
+            expect(msg.message).toBe('메시지 전송 테스트');
             done();
         });
-        socket.emit('send', '메시지 전송 테스트');
+        socket.emit('send', {
+            socketIdx: socket.id,
+            message: '메시지 전송 테스트',
+            room: '#1'
+        });
     });
 });

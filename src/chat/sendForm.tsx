@@ -14,7 +14,11 @@ const SendForm: React.FC<SendFormProps> = (props) => {
     const sendMessage = (e: any) => {
         e.preventDefault();
         if (message.length > 0) {
-            socket.emit('send', message);
+            socket.emit('send', {
+                socketIdx: socket.id,
+                message: message,
+                room: '#1'
+            });
             setMessage('');
         }
     }
