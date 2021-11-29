@@ -10,7 +10,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         socket
     } = props;
     const room = useRef(null);
-    socket.on('receive', (data: { idx: number, message: string }) => {
+    socket.on('receive', (data: { idx: string, message: string }) => {
         const MessageNode = document.createElement('p');
         MessageNode.innerText = data.message;
         const root: any = room.current;
