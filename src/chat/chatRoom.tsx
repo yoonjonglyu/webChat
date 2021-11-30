@@ -41,9 +41,12 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                         <p
                             key={idx}
                             style={{
+                                maxWidth: "88%",
                                 padding: "12px",
-                                wordBreak: 'break-all',
-                                background: current.idx === socket.id ? 'tomato' : '#ffffff',
+                                margin: "8px",
+                                borderRadius: "6px",
+                                wordBreak: "break-all",
+                                background: current.idx === socket.id ? "tomato" : "#ffffff",
                             }}
                         >
                             {current.message}
