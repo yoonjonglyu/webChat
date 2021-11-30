@@ -28,6 +28,15 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 handleChatLog();
             }
         });
+        socket.on('leaveRoom', (id: string) => {
+            if (socket.connected) {
+                state.push({
+                    idx: '#system',
+                    message: `${id} 님이 대화에서 나갔습니다.`,
+                });
+                handleChatLog();
+            }
+        });
     }, []);
     const handleChatLog = () => {
         setChatLog([...state]);

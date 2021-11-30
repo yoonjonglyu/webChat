@@ -21,19 +21,25 @@ describe('chatRoom 채팅 메시지 보기', () => {
             <ChatRoom socket={socket} />
         );
         socket.on('receive', (msg: {
-            socketIdx: string,
+            idx: string,
             message: string
         }) => {
             expect(msg.message).toBe('메시지 수신 테스트');
-            done();
-        });
-        socket.on('joinRoom', (id: string) => {
-            expect(id).toBe(socket.id);
             done();
         });
         socket.emit('send', {
             socketIdx: socket.id,
             message: '메시지 수신 테스트'
         });
+        socket.on('joinRoom', (id: string) => {
+            expect(id).toBe(socket.id);
+            done();
+        });
+        socket.emit('joinRoom', socket.id);
+        socket.on('leaveRoom', (id: string) => {
+            expect(id).toBe(socket.id);
+            done();
+        });
+        socket.emit('leaveRoom', socket.id);
     });
 });
