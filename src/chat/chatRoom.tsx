@@ -48,10 +48,10 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 chatLog.map((current, idx) => {
                     const Style: React.CSSProperties = {
                         maxWidth: "58%",
-                        padding: "12px",
+                        padding: "8px",
                         margin: "8px",
                         borderRadius: "6px",
-                        wordBreak: "break-all",
+                        wordBreak: "break-word",
                         background: "#a7a2a2",
                     };
                     if (current.idx === '#system') {
