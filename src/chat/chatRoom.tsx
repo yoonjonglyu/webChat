@@ -15,7 +15,16 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         socket.on('receive', (data: { idx: string, message: string }) => {
             if (socket.connected) {
                 // 골때린다 컨텍스트가 갈리는건지 여기서는 chatLog가 갱신이 안된다.ㅋㅋ 비제어 방식
-                state.push(data); 
+                state.push(data);
+                handleChatLog();
+            }
+        });
+        socket.on('joinRoom', (id: string) => {
+            if (socket.connected) {
+                state.push({
+                    idx: '#system',
+                    message: `${id} 님이 대화에 참여 하였습니다.`,
+                });
                 handleChatLog();
             }
         });
@@ -37,17 +46,31 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         >
             {
                 chatLog.map((current, idx) => {
+                    const Style: React.CSSProperties = {
+                        maxWidth: "58%",
+                        padding: "12px",
+                        margin: "8px",
+                        borderRadius: "6px",
+                        wordBreak: "break-all",
+                        background: "#a7a2a2",
+                    };
+                    if (current.idx === '#system') {
+                        Style.maxWidth = "100%";
+                        Style.textAlign = "center";
+                    }
+                    if (current.idx === socket.id) {
+                        Style.background = "tomato";
+                        Style.marginLeft = "auto";
+                    }
+                    else if (current.idx !== '#system') {
+                        Style.background = "#ffffff";
+                        Style.marginRight = "auto";
+                    }
+
                     return (
                         <p
                             key={idx}
-                            style={{
-                                maxWidth: "88%",
-                                padding: "12px",
-                                margin: "8px",
-                                borderRadius: "6px",
-                                wordBreak: "break-all",
-                                background: current.idx === socket.id ? "tomato" : "#ffffff",
-                            }}
+                            style={Style}
                         >
                             {current.message}
                         </p>

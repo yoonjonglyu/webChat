@@ -27,6 +27,10 @@ describe('chatRoom 채팅 메시지 보기', () => {
             expect(msg.message).toBe('메시지 수신 테스트');
             done();
         });
+        socket.on('joinRoom', (id: string) => {
+            expect(id).toBe(socket.id);
+            done();
+        });
         socket.emit('send', {
             socketIdx: socket.id,
             message: '메시지 수신 테스트'
