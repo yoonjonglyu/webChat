@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Socket } from 'socket.io-client';
 
-import  ChatMessage from './chatMessage';
+import ChatMessage from './chatMessage';
 
 interface ChatRoomProps {
     socket: Socket
@@ -11,7 +11,9 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     const {
         socket
     } = props;
-    const [chatLog, setChatLog] = useState<Array<any>>([]);
+    const [chatLog, setChatLog] = useState<Array<{
+        idx: string, message: string
+    }>>([]);
     const state = Array.from(chatLog);
     useEffect(() => { // 컴포넌트 리렌더링에 의한 리스닝 이벤트 중복 문제 해결
         socket.on('receive', (data: { idx: string, message: string }) => {
@@ -44,6 +46,14 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         setChatLog([...state]);
     }
 
+    // 자기가 최신 메시지를 보낼때 자동 스크롤하기
+    const Room: any = useRef(null);
+    useEffect(() => {
+        if (socket.id === chatLog[chatLog.length - 1]?.idx) {
+            Room.current?.scroll(0, Room.current.scrollHeight);
+        }
+    }, [chatLog]);
+
     return (
         <div
             className="chat-room"
@@ -54,8 +64,9 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 background: "#E6DDC4",
                 overflow: "auto",
             }}
+            ref={Room}
         >
-            <ChatMessage 
+            <ChatMessage
                 messages={chatLog}
                 userIdx={socket.id}
             />
