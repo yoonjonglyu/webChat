@@ -51,7 +51,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 display: "flex",
                 flexFlow: "column nowrap",
                 flex: "1 0px",
-                border: "1px solid",
+                border: "1px solid #181818",
                 overflow: "auto",
             }}
         >
