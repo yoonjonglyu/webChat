@@ -22,20 +22,26 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                         maxWidth: "58%",
                         padding: "8px",
                         margin: "8px",
-                        borderRadius: "6px",
+                        fontSize: "1rem",
+                        color: "#1b1b1b",
                         wordBreak: "break-word",
-                        background: "#a7a2a2",
+                        background: "rgb(0 0 0 / 19%)",
+                        borderRadius: "6px",
+
                     };
                     if (current.idx === '#system') {
                         Style.maxWidth = "100%";
                         Style.textAlign = "center";
+                        Style.color = "rgb(98 14 14)";
+                        Style.fontSize = "0.9rem";
+                        Style.margin = "6px";
                     }
                     if (current.idx === userIdx) {
                         Style.background = "tomato";
                         Style.marginLeft = "auto";
                     }
                     else if (current.idx !== '#system') {
-                        Style.background = "#ffffff";
+                        Style.background = "#eeeeee";
                         Style.marginRight = "auto";
                     }
 
