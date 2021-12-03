@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Socket } from 'socket.io-client';
 
+import  ChatMessage from './chatMessage';
+
 interface ChatRoomProps {
     socket: Socket
 }
@@ -53,39 +55,10 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 overflow: "auto",
             }}
         >
-            {
-                chatLog.map((current, idx) => {
-                    const Style: React.CSSProperties = {
-                        maxWidth: "58%",
-                        padding: "8px",
-                        margin: "8px",
-                        borderRadius: "6px",
-                        wordBreak: "break-word",
-                        background: "#a7a2a2",
-                    };
-                    if (current.idx === '#system') {
-                        Style.maxWidth = "100%";
-                        Style.textAlign = "center";
-                    }
-                    if (current.idx === socket.id) {
-                        Style.background = "tomato";
-                        Style.marginLeft = "auto";
-                    }
-                    else if (current.idx !== '#system') {
-                        Style.background = "#ffffff";
-                        Style.marginRight = "auto";
-                    }
-
-                    return (
-                        <p
-                            key={idx}
-                            style={Style}
-                        >
-                            {current.message}
-                        </p>
-                    );
-                })
-            }
+            <ChatMessage 
+                messages={chatLog}
+                userIdx={socket.id}
+            />
         </div>
     );
 }
