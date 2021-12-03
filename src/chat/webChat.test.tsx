@@ -35,7 +35,7 @@ describe('webChat 채팅창', () => {
             done();
         });
         socket.on('receive', (msg: {
-            socketIdx: string,
+            idx: string,
             message: string,
             room: string
         }) => {
