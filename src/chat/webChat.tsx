@@ -41,7 +41,7 @@ const WebChat: React.FC<WebChatProps> = () => {
             width: "80%",
             height: "auto",
             padding: "12px",
-            border: "1px solid tomato",
+            background: "#678983",
             borderRadius: "12px"
         }}>
             <ChatRoom socket={socket} />

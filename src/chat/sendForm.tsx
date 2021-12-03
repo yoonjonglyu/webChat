@@ -36,8 +36,6 @@ const SendForm: React.FC<SendFormProps> = (props) => {
                 justifyContent: "center",
                 padding: "6px",
                 background: "#DFD8CA",
-                border: "0.5px solid #181818",
-                borderTop: "0"
             }}
         >
             <input
