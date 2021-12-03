@@ -9,7 +9,7 @@ interface WebChatProps {
 }
 
 const WebChat: React.FC<WebChatProps> = () => {
-    const socket = io('http://localhost:7778/webChat', {
+    const socket = io('http://localhost:444/webChat', {
         transports: ['websocket']
     });;
 
