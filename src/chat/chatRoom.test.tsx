@@ -25,7 +25,6 @@ describe('chatRoom 채팅 메시지 보기', () => {
             message: string
         }) => {
             expect(msg.message).toBe('메시지 수신 테스트');
-            jest.setTimeout(5000);
             done();
         });
         socket.emit('send', {
@@ -35,13 +34,11 @@ describe('chatRoom 채팅 메시지 보기', () => {
         });
         socket.on('joinRoom', (id: string) => {
             expect(id).toBe(socket.id);
-            jest.setTimeout(5000);
             done();
         });
         socket.emit('joinRoom', socket.id);
         socket.on('leaveRoom', (id: string) => {
             expect(id).toBe(socket.id);
-            jest.setTimeout(5000);
             done();
         });
         socket.emit('leaveRoom', socket.id);
