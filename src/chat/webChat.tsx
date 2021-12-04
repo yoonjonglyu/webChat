@@ -1,37 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
 import SendForm from './sendForm';
 import ChatRoom from './chatRoom';
 
 interface WebChatProps {
-
+    socket: Socket
 }
 
-const WebChat: React.FC<WebChatProps> = () => {
-    const socket = io('http://localhost:444/webChat', {
-        transports: ['websocket']
-    });;
-
-    socket.on('connect', async () => {
-        if (socket.connected) socket.emit('init', socket.id);
-    });
-    socket.on('room', (rooms: any) => {
-
-    });
-    socket.on('disconnect', () => {
-
-    });
+const WebChat: React.FC<WebChatProps> = (props) => {
+    const {
+        socket
+    } = props;
 
     useEffect(() => {
+        socket.on('connect', async () => {
+            if (socket.connected) socket.emit('init', socket.id);
+        });
+        socket.on('disconnect', () => {
+    
+        });
         return () => {
             socket.close();
         }
     }, []);
-
-    const joinChatRoom = (roomIdx: string) => {
-        socket.emit('join', roomIdx);
-    }
 
     return (
         <article style={{

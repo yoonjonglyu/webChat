@@ -19,9 +19,8 @@ describe('sendForm 채팅 메시지 입력 폼', () => {
             <SendForm socket={socket} />
         );
         socket.on('receive', (msg: {
-            socketIdx: string,
-            message: string,
-            room: string
+            idx: string,
+            message: string
         }) => {
             expect(msg.message).toBe('메시지 전송 테스트');
             done();
