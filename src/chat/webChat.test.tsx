@@ -1,15 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { io } from 'socket.io-client';
+import { Socket} from './socket';
 
 import WebChat from './webChat';
 
 describe('webChat 채팅창', () => {
     let socket: any;
     beforeAll((done) => {
-        socket = io('http://localhost:7778/webChat', {
-            transports: ['websocket']
-        });
+        socket = Socket;
         socket.on('connect', done);
     });
     afterAll(() => {
