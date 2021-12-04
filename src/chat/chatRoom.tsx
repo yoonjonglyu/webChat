@@ -50,7 +50,9 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     const Room: any = useRef(null);
     useEffect(() => {
         if (socket.id === chatLog[chatLog.length - 1]?.idx) {
-            Room.current?.scroll(0, Room.current.scrollHeight);
+            if(Room.current.scroll){
+                Room.current.scroll(0, Room.current.scrollHeight);
+            }
         }
     }, [chatLog]);
 
