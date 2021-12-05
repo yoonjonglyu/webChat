@@ -5,7 +5,7 @@ import Main from './pages/main';
 
 const App: React.FC = () => {
     return (
-        <Router>
+        <Router basename="/webChat">
             <Routes>
                 <Route path="/" element={<Main />} />
             </Routes>
