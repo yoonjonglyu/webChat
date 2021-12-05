@@ -17,11 +17,11 @@ describe('메인 라우트 시작점', () => {
         fireEvent.click(screen.getByText('800px'));
         expect(screen.getByText('size: 800px'));
         expect(container).toHaveStyle('max-width: 800px');
-        fireEvent.click(screen.getByText('500px'));
-        expect(screen.getByText('size: 500px'));
-        expect(container).toHaveStyle('max-width: 500px');
         fireEvent.click(screen.getByText('400px'));
         expect(screen.getByText('size: 400px'));
         expect(container).toHaveStyle('max-width: 400px');
+        fireEvent.click(screen.getByText('350px'));
+        expect(screen.getByText('size: 350px'));
+        expect(container).toHaveStyle('max-width: 350px');
     });
 });
