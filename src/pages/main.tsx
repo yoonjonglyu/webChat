@@ -9,7 +9,7 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = () => {
     const WebChat = ChatConfig({
-        url: 'http://localhost:444/webChat'
+        url: 'https://chatting-serve.herokuapp.com/webChat'
     });
 
     return (
