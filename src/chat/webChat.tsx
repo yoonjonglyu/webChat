@@ -29,6 +29,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         <article style={{
             display: "flex",
             flexFlow: "column wrap",
+            flex: "1",
             justifyContent: "center",
             width: "80%",
             height: "auto",
