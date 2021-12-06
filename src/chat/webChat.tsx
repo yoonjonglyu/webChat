@@ -31,10 +31,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             flexFlow: "column wrap",
             flex: "1",
             justifyContent: "center",
-            height: "auto",
-            padding: "12px",
-            background: "#678983",
-            borderRadius: "12px"
+            border: "1px solid #678983",
         }}>
             <ChatRoom socket={socket} />
             <SendForm socket={socket} />
