@@ -7,7 +7,7 @@ const CommonStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
-        background-color: #EADEDE;
+        background-color: #ece9e9;
         // #131313
     }
     #app {
@@ -19,10 +19,9 @@ const Header = StyledComponents.header`
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 120px;
+    height: 100px;
     margin: 0;
     padding: 12px;
-    border-bottom: 1px solid;
 `;
 const Logo = StyledComponents.h1`
     color: #F58840;
@@ -31,6 +30,7 @@ const Main = StyledComponents.main`
     display: flex;
     justify-content: center;
     flex: 1 90vh;
+    margin: 3px 0;
 `;
 const Footer = StyledComponents.footer`
     display: flex;
