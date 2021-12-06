@@ -27,7 +27,6 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                         wordBreak: "break-word",
                         background: "rgb(0 0 0 / 19%)",
                         borderRadius: "6px",
-
                     };
                     if (current.idx === '#system') {
                         Style.maxWidth = "100%";
@@ -46,12 +45,28 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                     }
 
                     return (
-                        <p
+                        <article
                             key={idx}
-                            style={Style}
+                            style={{
+                                display: "flex",
+                                flexFlow: "column",
+                            }}
                         >
-                            {current.message}
-                        </p>
+                            {
+                                current.idx !== '#system' && current.idx !== userIdx &&
+                                <span
+                                    style={{
+                                        paddingLeft: "8px",
+                                        fontSize: "0.8rem",
+                                    }}
+                                >
+                                    {current.idx}
+                                </span>
+                            }
+                            <p style={Style}>
+                                {current.message}
+                            </p>
+                        </article>
                     );
                 })
             }

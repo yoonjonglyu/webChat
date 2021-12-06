@@ -10,7 +10,7 @@ describe('채팅 메시지', () => {
                 userIdx={'1'}
                 messages={[
                     {
-                        idx: '1',
+                        idx: '12',
                         message: '테스트 입니다.'
                     }
                 ]}
@@ -18,6 +18,7 @@ describe('채팅 메시지', () => {
         );
 
         expect(screen.getByText('테스트 입니다.')).toBeInTheDocument();
+        expect(screen.getByText('12')).toBeInTheDocument();
     });
 });
 
