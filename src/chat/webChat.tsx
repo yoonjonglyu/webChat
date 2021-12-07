@@ -15,7 +15,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     const {
         socket
     } = props;
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(1);
     const handleStep = () => {
         if (step + 1 <= 1) setStep(step + 1);
     }
