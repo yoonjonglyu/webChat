@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Socket } from 'socket.io-client';
 
-import SendForm from './talk/sendForm';
-import ChatRoom from './talk/chatRoom';
+import ChatWindow from './talk/chatWindow';
 
 interface WebChatProps {
     socket: Socket
@@ -33,8 +32,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             justifyContent: "center",
             border: "1px solid #678983",
         }}>
-            <ChatRoom socket={socket} />
-            <SendForm socket={socket} />
+            <ChatWindow socket={socket} />
         </article >
     );
 }
