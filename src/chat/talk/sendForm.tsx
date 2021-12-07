@@ -11,7 +11,7 @@ const SendForm: React.FC<SendFormProps> = (props) => {
     } = props;
     const [message, setMessage] = useState('');
 
-    const sendMessage = (e: any) => {
+    const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (message.length > 0) {
             socket.emit('send', {
@@ -22,7 +22,7 @@ const SendForm: React.FC<SendFormProps> = (props) => {
             setMessage('');
         }
     }
-    const handleMsg = (e: any) => {
+    const handleMsg = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value);
     }
 
@@ -49,9 +49,8 @@ const SendForm: React.FC<SendFormProps> = (props) => {
                 }}
             />
             <button
-                type="button"
+                type="submit"
                 className="chat-request"
-                onClick={sendMessage}
                 style={{
                     margin: "3px 0 0 0",
                     padding: "6px 12px",
