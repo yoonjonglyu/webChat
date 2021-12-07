@@ -22,7 +22,7 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = () => {
     const WebChat = ChatConfig({
-        url: 'http://localhost:444/webChat' || 'https://chatting-serve.herokuapp.com/webChat'
+        url: /*'http://localhost:444/webChat' || */ 'https://chatting-serve.herokuapp.com/webChat'
     });
     const [container, setContainer] = useState<'800' | '400' | '350'>('800');
 
