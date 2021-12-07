@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Socket } from './socket';
 
 import WebChat from './webChat';
@@ -34,6 +34,11 @@ describe('webChat 채팅창', () => {
         );
 
         expect(screen.getByRole('article')).toBeVisible();
+
+        expect(screen.getByText('대화에 사용하실 닉네임을 입력해주세요.')).toBeVisible();
+        expect(screen.getByRole('button')).toHaveTextContent('채팅시작');
+
+        fireEvent.click(screen.getByRole('button'));
         const chatBox = container.querySelector('.chat-room');
         expect(chatBox).toBeVisible();
         const chatInput = container.querySelector('.chat-form');
