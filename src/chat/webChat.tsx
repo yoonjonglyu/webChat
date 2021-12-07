@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { io, Socket } from 'socket.io-client';
+import React, { useEffect } from 'react';
+import { Socket } from 'socket.io-client';
 
-import SendForm from './sendForm';
-import ChatRoom from './chatRoom';
+import SendForm from './talk/sendForm';
+import ChatRoom from './talk/chatRoom';
 
 interface WebChatProps {
     socket: Socket
@@ -18,7 +18,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             if (socket.connected) socket.emit('init', socket.id);
         });
         socket.on('disconnect', () => {
-    
+
         });
         return () => {
             socket.close();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Socket } from './socket';
+import { Socket } from '../socket';
 
 import SendForm from './sendForm';
 
