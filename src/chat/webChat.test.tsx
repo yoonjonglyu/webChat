@@ -9,11 +9,19 @@ describe('webChat 채팅창', () => {
     beforeAll((done) => {
         socket = Socket;
         socket.on('connect', done);
+        socket.emit('join', {
+            socketIdx: socket.id,
+            room: '#1'
+        });
     });
     afterAll(() => {
         socket.close();
     });
     test('socket', (done) => {
+        socket.emit('join', {
+            socketIdx: socket.id,
+            room: '#1'
+        });
         socket.on('receive', (msg: {
             idx: string,
             message: string
@@ -27,23 +35,26 @@ describe('webChat 채팅창', () => {
             room: '#1'
         });
     });
-    
-    test('render', () => {
+
+    test('render 연결중', () => {
+        render(
+            <WebChat socket={socket} />
+        );
+        expect(screen.getByRole('article')).toBeVisible();
+        expect(screen.getByText('연결중입니다.')).toBeInTheDocument();
+    });
+    test('render 채팅창', (done) => {
         const { container } = render(
             <WebChat socket={socket} />
         );
-
-        expect(screen.getByRole('article')).toBeVisible();
-
-        expect(screen.getByText('대화에 사용하실 닉네임을 입력해주세요.')).toBeVisible();
-        expect(screen.getByRole('button')).toHaveTextContent('채팅시작');
-
-        fireEvent.click(screen.getByRole('button'));
+        fireEvent.click(screen.getByRole('article'));
+        
         const chatBox = container.querySelector('.chat-room');
         expect(chatBox).toBeVisible();
         const chatInput = container.querySelector('.chat-form');
         expect(chatInput).toBeVisible();
         expect(chatInput?.querySelector('.chat-input')).toBeVisible();
         expect(chatInput?.querySelector('.chat-request')).toHaveTextContent('전송');
+        done();
     });
 });

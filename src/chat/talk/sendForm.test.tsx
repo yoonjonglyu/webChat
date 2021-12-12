@@ -18,6 +18,10 @@ describe('sendForm 채팅 메시지 입력 폼', () => {
         render(
             <SendForm socket={socket} />
         );
+        socket.emit('join', {
+            socketIdx: socket.id,
+            room: '#1'
+        });
         socket.on('receive', (msg: {
             idx: string,
             message: string

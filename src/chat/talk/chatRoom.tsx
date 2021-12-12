@@ -43,7 +43,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         });
     }, []);
     const handleChatLog = () => {
-        setChatLog([...state]);
+        setChatLog(Array.from(state));
     }
 
     // 자기가 최신 메시지를 보낼때 자동 스크롤하기
