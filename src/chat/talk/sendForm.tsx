@@ -28,7 +28,7 @@ const SendForm: React.FC<SendFormProps> = (props) => {
 
     return (
         <form
-            className="chat-form"
+            data-testid="chat-form"
             onSubmit={sendMessage}
             style={{
                 display: "flex",
@@ -40,7 +40,7 @@ const SendForm: React.FC<SendFormProps> = (props) => {
         >
             <input
                 type="text"
-                className="chat-input"
+                data-testid="chat-input"
                 value={message}
                 onChange={handleMsg}
                 style={{
@@ -50,7 +50,7 @@ const SendForm: React.FC<SendFormProps> = (props) => {
             />
             <button
                 type="submit"
-                className="chat-request"
+                data-testid="chat-request"
                 style={{
                     margin: "3px 0 0 0",
                     padding: "6px 12px",

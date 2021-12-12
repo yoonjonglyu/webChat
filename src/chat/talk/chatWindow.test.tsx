@@ -18,7 +18,7 @@ describe('채팅창 부분', () => {
             <ChatWindow socket={socket} />
         );
 
-        expect(container.querySelector('.chat-room')).toBeVisible();
-        expect(container.querySelector('.chat-form')).toBeVisible();
+        expect(screen.getByTestId('chat-room')).toBeVisible();
+        expect(screen.getByTestId('chat-form')).toBeVisible();
     });
 });

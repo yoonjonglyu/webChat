@@ -43,18 +43,16 @@ describe('webChat 채팅창', () => {
         expect(screen.getByRole('article')).toBeVisible();
         expect(screen.getByText('연결중입니다.')).toBeInTheDocument();
     });
-    test('render 채팅창', (done) => {
-        const { container } = render(
+    test('render 채팅창', async () => {
+        render(
             <WebChat socket={socket} />
         );
+        expect(screen.getByRole('article')).toBeVisible();
         fireEvent.click(screen.getByRole('article'));
-        
-        const chatBox = container.querySelector('.chat-room');
-        expect(chatBox).toBeVisible();
-        const chatInput = container.querySelector('.chat-form');
-        expect(chatInput).toBeVisible();
-        expect(chatInput?.querySelector('.chat-input')).toBeVisible();
-        expect(chatInput?.querySelector('.chat-request')).toHaveTextContent('전송');
-        done();
+        expect(await screen.findByTestId('chat-room')).toBeVisible();
+        expect(await screen.findByTestId('chat-form')).toBeVisible();
+        expect(await screen.findByTestId('chat-input')).toBeVisible();
+        expect(await screen.findByTestId('chat-request')).toHaveTextContent('전송');
+
     });
 });

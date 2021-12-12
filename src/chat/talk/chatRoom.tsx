@@ -58,7 +58,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
 
     return (
         <div
-            className="chat-room"
+            data-testid="chat-room"
             style={{
                 display: "flex",
                 flexFlow: "column nowrap",
