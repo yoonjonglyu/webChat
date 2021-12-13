@@ -15,8 +15,8 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         socket
     } = props;
     const [step, setStep] = useState(0);
-    const handleStep = () => {
-        setStep(2);
+    const handleStep = (step: number) => {
+        setStep(step);
     }
 
     useEffect(() => {
@@ -26,12 +26,14 @@ const WebChat: React.FC<WebChatProps> = (props) => {
                     socketIdx: socket.id,
                     room: '#1'
                 });
-                handleStep();
+                handleStep(2);
             }
         });
         socket.on('disconnect', () => {
+            handleStep(1);
         });
         socket.on('connect_error', () => {
+            handleStep(1);
         });
         return () => {
             socket.close();
@@ -47,14 +49,18 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             justifyContent: "center",
             border: "1px solid #678983",
         }}
-            onClick={handleStep}
+            onClick={() => handleStep(2)}
         >
             {
                 step === 0 &&
                 <Loading state={0} />
             }
-            {
+                        {
                 step === 1 &&
+                <Loading state={1} />
+            }
+            {
+                step === 3 &&
                 <SendNickName />
 
             }

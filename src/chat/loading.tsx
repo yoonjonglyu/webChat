@@ -11,8 +11,25 @@ const Loading: React.FC<LoadingProps> = ({ state }) => {
     ];
 
     return (
-        <div>
-            {message[state]}
+        <div
+            style={{
+                display: "flex",
+                flex: "1",
+                flexFlow: "column",
+                justifyContent: "center",
+                background: "#eeebeb"
+            }}
+        >
+            <h2
+                style={{
+                    textAlign: "center",
+                    fontSize: "0.9rem",
+                    fontWeight: "normal",
+                    color: "tomato"
+                }}
+            >
+                {message[state]}
+            </h2>
         </div>
     );
 }
