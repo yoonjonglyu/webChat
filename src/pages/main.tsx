@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StyledComponents from 'styled-components'
 
 import Layout from '../components/layout';
-import ChatConfig from '../chat/chatConfig';
+import Tomato from '../chat/tomato';
 
 const Widget = StyledComponents.section`
     position: absolute;
@@ -23,9 +23,6 @@ interface MainProps {
 }
 
 const Main: React.FC<MainProps> = () => {
-    const WebChat = ChatConfig({
-        url: 'http://localhost:444/webChat' ||  'https://chatting-serve.herokuapp.com/webChat'
-    });
     const [container, setContainer] = useState<'800' | '400' | '350'>('800');
 
     const handleContainer = (width: typeof container) => {
@@ -64,7 +61,9 @@ const Main: React.FC<MainProps> = () => {
                     maxHeight: "645px"
                 }}
             >
-                <WebChat />
+                <Tomato
+                    url={'http://localhost:444/webChat' || 'https://chatting-serve.herokuapp.com/webChat'}
+                />
             </section>
         </Layout>
     );

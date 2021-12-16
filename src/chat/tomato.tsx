@@ -3,20 +3,21 @@ import { io } from 'socket.io-client';
 
 import WebChat from './webChat';
 
-interface ChatConfigProps {
+interface TomatoProps {
     url: string
 }
 
-const ChatConfig: (props: ChatConfigProps) => React.FC = (props) => {
+const Tomato: React.FC<TomatoProps> = (props) => {
     const {
         url
     } = props;
-
     const Socket = io(url, {
         transports: ['websocket']
     });
 
-    return () => (<WebChat socket={Socket} />);
+    return (
+        <WebChat socket={Socket} />
+    );
 }
 
-export default ChatConfig;
+export default Tomato;
