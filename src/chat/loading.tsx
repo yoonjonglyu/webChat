@@ -14,10 +14,12 @@ const Loading: React.FC<LoadingProps> = ({ state }) => {
         <div
             style={{
                 display: "flex",
-                flex: "1",
                 flexFlow: "column",
                 justifyContent: "center",
-                background: "#eeebeb"
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                background: "rgb(60, 60, 60, 50%)",
             }}
         >
             <h2
@@ -25,7 +27,8 @@ const Loading: React.FC<LoadingProps> = ({ state }) => {
                     textAlign: "center",
                     fontSize: "0.9rem",
                     fontWeight: "normal",
-                    color: "tomato"
+                    color: "tomato",
+                    textShadow: "0.5px 0.5px #88473b",
                 }}
             >
                 {message[state]}

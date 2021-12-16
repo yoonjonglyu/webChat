@@ -47,27 +47,20 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             flexFlow: "column wrap",
             flex: "1",
             justifyContent: "center",
+            position: "relative",
             border: "1px solid #678983",
         }}
             onClick={() => handleStep(2)}
         >
             {
-                step === 0 &&
-                <Loading state={0} />
-            }
-                        {
-                step === 1 &&
-                <Loading state={1} />
+                step < 2 &&
+                <Loading state={step} />
             }
             {
                 step === 3 &&
                 <SendNickName />
-
             }
-            {
-                step === 2 &&
-                <ChatWindow socket={socket} />
-            }
+            <ChatWindow socket={socket} />
         </article >
     );
 }
