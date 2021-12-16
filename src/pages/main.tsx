@@ -8,9 +8,11 @@ const Widget = StyledComponents.section`
     position: absolute;
     right: 10px;
     top: 50%;
+    z-index: 999999;
     &:hover {
         
     }
+    
 `;
 const WidgetList = StyledComponents.ul`
     list-style: none;
