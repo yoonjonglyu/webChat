@@ -5,13 +5,13 @@ interface ChatMessageProps {
         idx: string
         message: string
     }>
-    userIdx: string
+    userId: string
 }
 
 const ChatMessage: React.FC<ChatMessageProps> = (props) => {
     const {
         messages,
-        userIdx
+        userId
     } = props;
 
     return (
@@ -35,7 +35,7 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                         Style.fontSize = "0.9rem";
                         Style.margin = "6px";
                     }
-                    if (current.idx === userIdx) {
+                    if (current.idx === userId) {
                         Style.background = "tomato";
                         Style.marginLeft = "auto";
                     }
@@ -53,7 +53,7 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                             }}
                         >
                             {
-                                current.idx !== '#system' && current.idx !== userIdx &&
+                                current.idx !== '#system' && current.idx !== userId &&
                                 <span
                                     style={{
                                         paddingLeft: "8px",

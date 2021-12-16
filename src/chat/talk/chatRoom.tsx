@@ -11,14 +11,19 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     const {
         socket
     } = props;
+    const [userId, setUserId] = useState('');
     const [chatLog, setChatLog] = useState<Array<{
         idx: string, message: string
     }>>([]);
+
+    useEffect(() => {
+        setUserId(socket.id);
+    }, [chatLog]);
+
     useEffect(() => {
         const handleChatLog = (msg: { idx: string, message: string }) => {
             setChatLog([...chatLog, msg]);
         }
-
         socket.once('receive', (data: { idx: string, message: string }) => {
             if (socket.connected) {
                 handleChatLog(data);
@@ -69,7 +74,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         >
             <ChatMessage
                 messages={chatLog}
-                userIdx={socket.id}
+                userId={userId}
             />
         </div>
     );

@@ -7,7 +7,7 @@ describe('채팅 메시지', () => {
     test('render', () => {
         render(
             <ChatMessage
-                userIdx={'1'}
+                userId={'1'}
                 messages={[
                     {
                         idx: '12',
