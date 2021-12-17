@@ -14,7 +14,7 @@ describe('채팅창 부분', () => {
         socket.close();
     });
     test('render', () => {
-        const { container } = render(
+        render(
             <ChatWindow socket={socket} />
         );
 
