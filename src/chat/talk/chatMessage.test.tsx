@@ -11,7 +11,8 @@ describe('채팅 메시지', () => {
                 messages={[
                     {
                         idx: '12',
-                        message: '테스트 입니다.'
+                        message: '테스트 입니다.',
+                        time: '오후 12:23'
                     }
                 ]}
             />
@@ -19,6 +20,7 @@ describe('채팅 메시지', () => {
 
         expect(screen.getByText('테스트 입니다.')).toBeInTheDocument();
         expect(screen.getByText('12')).toBeInTheDocument();
+        expect(screen.getByText('오후 12:23')).toBeInTheDocument();
     });
 });
 
