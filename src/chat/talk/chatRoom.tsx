@@ -13,7 +13,9 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     } = props;
     const [userId, setUserId] = useState('');
     const [chatLog, setChatLog] = useState<Array<{
-        idx: string, message: string
+        idx: string
+        message: string
+        time: string
     }>>([]);
 
     useEffect(() => {
@@ -22,7 +24,12 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
 
     useEffect(() => {
         const handleChatLog = (msg: { idx: string, message: string }) => {
-            setChatLog([...chatLog, msg]);
+            const state: { idx: string, message: string, time: string } = {
+                ...msg,
+                time: `${new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}`
+            };
+
+            setChatLog([...chatLog, state]);
         }
         socket.once('receive', (data: { idx: string, message: string }) => {
             if (socket.connected) {
