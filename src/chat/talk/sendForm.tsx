@@ -50,7 +50,7 @@ const SendForm: React.FC<SendFormProps> = (props) => {
                     margin: "3px 3px 0 0"
                 }}
             />
-            <SendPoto />
+            <SendPoto socket={socket} />
             <button
                 type="submit"
                 data-testid="chat-request"
