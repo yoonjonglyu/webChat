@@ -46,12 +46,12 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                     if (current.idx === userId) {
                         messageStyle.background = "tomato";
                         boxStyle.marginLeft = "auto";
-                        boxStyle.flexFlow ="row-reverse";
+                        boxStyle.flexFlow = "row-reverse";
                     }
                     else if (current.idx !== '#system') {
                         messageStyle.background = "#eeeeee";
                         boxStyle.marginRight = "auto";
-                        boxStyle.flexFlow ="row";
+                        boxStyle.flexFlow = "row";
                     }
 
                     return (
@@ -74,9 +74,17 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                                 </span>
                             }
                             <p style={boxStyle}>
-                                <span style={messageStyle}>
-                                    {current.message}
-                                </span>
+                                {
+                                    current.message.slice(0, 5) !== '@$IMG' ?
+                                        <span style={messageStyle}>
+                                            {current.message}
+                                        </span>
+                                        :
+                                        <img
+                                            src={current.message.slice(5)}
+                                            style={messageStyle}
+                                        />
+                                }
                                 {
                                     current.idx !== '#system' &&
                                     <time

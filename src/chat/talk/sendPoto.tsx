@@ -16,13 +16,14 @@ const SendPoto: React.FC<SendPotoProps> = ({ socket }) => {
                 reader.onload = (e: ProgressEvent<FileReader>) => {
                     socket.emit('send', {
                         socketIdx: socket.id,
-                        message: e.target?.result,
+                        message: `@$IMG ${e.target?.result}`,
                         room: '#1'
                     });
                 }
                 reader.readAsDataURL(file[0]);
             }
         }
+        e.target.value = '';
     }
 
     return (
