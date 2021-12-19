@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Socket } from 'socket.io-client';
 
+import PotoIcon from '../assets/poto.png';
+
 interface SendFormProps {
     socket: Socket
 }
@@ -48,6 +50,23 @@ const SendForm: React.FC<SendFormProps> = (props) => {
                     margin: "3px 3px 0 0"
                 }}
             />
+            <label
+                style={{
+                    display: "flex",
+                    marginRight: "3px"
+                }}
+            >
+                <img
+                    src={PotoIcon}
+                    width="30px"
+                />
+                <input
+                    type="file"
+                    style={{
+                        display: "none"
+                    }}
+                />
+            </label>
             <button
                 type="submit"
                 data-testid="chat-request"
