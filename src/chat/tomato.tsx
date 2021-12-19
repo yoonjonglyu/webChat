@@ -11,20 +11,24 @@ const Tomato: React.FC<TomatoProps> = (props) => {
     const {
         url
     } = props;
-    const [socket, setSocket] = useState<Socket>(io);
+    const [socket, setSocket] = useState<Socket | null>(null);
     useEffect(() => {
         setSocket(
             io(url,
                 {
                     transports: ['websocket']
-
                 }
             )
         );
     }, []);
 
     return (
-        <WebChat socket={socket} />
+        <>
+            {
+                socket !== null &&
+                <WebChat socket={socket} />
+            }
+        </>
     );
 }
 
