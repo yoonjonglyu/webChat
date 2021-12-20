@@ -58,15 +58,16 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
             socket.removeAllListeners('leaveRoom');
         }
     });
-    // 자기가 최신 메시지를 보낼때 자동 스크롤하기
+
     const Room: any = useRef(null);
     useEffect(() => {
-        if (socket.id === chatLog[chatLog.length - 1]?.idx) {
+        if (chatLog.length > 0) {
             if (Room.current.scroll) {
                 Room.current.scroll(0, Room.current.scrollHeight);
             }
         }
     }, [chatLog]);
+    
     return (
         <div
             data-testid="chat-room"
