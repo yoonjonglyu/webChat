@@ -51,20 +51,6 @@ const SendForm: React.FC<SendFormProps> = (props) => {
                 }}
             />
             <SendPoto socket={socket} />
-            <button
-                type="submit"
-                data-testid="chat-request"
-                style={{
-                    margin: "3px 0 0 0",
-                    padding: "6px 12px",
-                    color: "#FBF3E4",
-                    background: "#105652",
-                    border: "0",
-                    borderRadius: "3px",
-                }}
-            >
-                전송
-            </button>
         </form>
     );
 }

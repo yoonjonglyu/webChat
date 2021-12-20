@@ -52,7 +52,5 @@ describe('webChat 채팅창', () => {
         expect(await screen.findByTestId('chat-room')).toBeVisible();
         expect(await screen.findByTestId('chat-form')).toBeVisible();
         expect(await screen.findByTestId('chat-input')).toBeVisible();
-        expect(await screen.findByTestId('chat-request')).toHaveTextContent('전송');
-
     });
 });
