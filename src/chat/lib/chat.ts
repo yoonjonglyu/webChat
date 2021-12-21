@@ -35,6 +35,23 @@ class ChatEvents {
             room: room
         });
     }
+    sendImage(image: Blob) {
+        if (image.type.split('/')[0] === 'image') {
+            const reader = new FileReader();
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                this.socket.emit('send', {
+                    socketIdx: this.socket.id,
+                    message: `@$IMG ${e.target?.result}`,
+                    room: '#1'
+                });
+            }
+            reader.readAsDataURL(image);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
     receiveMessages(handleMessage: (msg: { idx: string, message: string }) => void) {
         this.socket.once('receive', (data: { idx: string, message: string }) => {
             if (this.socket.connected) {
