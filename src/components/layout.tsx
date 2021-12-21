@@ -52,7 +52,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
         <>
             <CommonStyle />
             <Header role="header">
-                <Logo>WebChat</Logo>
+                <Logo>토마토톡</Logo>
             </Header>
             <Main role="main">
                 {children}

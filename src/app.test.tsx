@@ -11,6 +11,6 @@ describe('웹앱 라우트', () => {
             <App />
         );
 
-        expect(screen.getByText('WebChat')).toBeInTheDocument();
+        expect(screen.getByText('토마토톡')).toBeInTheDocument();
     });
 });
