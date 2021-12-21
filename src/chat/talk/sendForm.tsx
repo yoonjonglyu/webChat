@@ -3,6 +3,8 @@ import { Socket } from 'socket.io-client';
 
 import SendPoto from './sendPoto';
 
+import ChatEvents from '../lib/chatEvents';
+
 interface SendFormProps {
     socket: Socket
 }
@@ -12,15 +14,11 @@ const SendForm: React.FC<SendFormProps> = (props) => {
         socket
     } = props;
     const [message, setMessage] = useState('');
-
     const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (message.length > 0) {
-            socket.emit('send', {
-                socketIdx: socket.id,
-                message: message,
-                room: '#1'
-            });
+            const Events = new ChatEvents(socket);
+            Events.sendMessage(message, '#1');
             setMessage('');
         }
     }

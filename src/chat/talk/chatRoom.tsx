@@ -3,6 +3,8 @@ import { Socket } from 'socket.io-client';
 
 import ChatMessage from './chatMessage';
 
+import ChatEvents from '../lib/chatEvents';
+
 interface ChatRoomProps {
     socket: Socket
 }
@@ -23,7 +25,9 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     }, [chatLog]);
 
     useEffect(() => {
-        const handleChatLog = (msg: { idx: string, message: string }) => {
+        const Events = new ChatEvents(socket);
+
+        Events.receiveMessages((msg: { idx: string, message: string }) => {
             setChatLog([
                 ...chatLog,
                 {
@@ -31,32 +35,10 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                     time: `${new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}`
                 }
             ]);
-        }
-        socket.once('receive', (data: { idx: string, message: string }) => {
-            if (socket.connected) {
-                handleChatLog(data);
-            }
         });
-        socket.once('joinRoom', (id: string) => {
-            if (socket.connected) {
-                handleChatLog({
-                    idx: '#system',
-                    message: `${id} 님이 대화에 참여 하였습니다.`,
-                });
-            }
-        });
-        socket.once('leaveRoom', (id: string) => {
-            if (socket.connected) {
-                handleChatLog({
-                    idx: '#system',
-                    message: `${id} 님이 대화에서 나갔습니다.`,
-                });
-            }
-        });
+
         return () => {
-            socket.removeAllListeners('receive');
-            socket.removeAllListeners('joinRoom');
-            socket.removeAllListeners('leaveRoom');
+            Events.clearReceive();
         }
     });
 
