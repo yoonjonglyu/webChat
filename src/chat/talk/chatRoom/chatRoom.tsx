@@ -3,7 +3,7 @@ import { Socket } from 'socket.io-client';
 
 import ChatMessage from './chatMessage';
 
-import ChatEvents from '../lib/chatEvents';
+import ChatEvents from '../../lib/chatEvents';
 
 interface ChatRoomProps {
     socket: Socket
