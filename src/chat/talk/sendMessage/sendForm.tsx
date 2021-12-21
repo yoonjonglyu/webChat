@@ -3,7 +3,7 @@ import { Socket } from 'socket.io-client';
 
 import SendPoto from './sendPoto';
 
-import ChatEvents from '../lib/chatEvents';
+import ChatEvents from '../../lib/chatEvents';
 
 interface SendFormProps {
     socket: Socket

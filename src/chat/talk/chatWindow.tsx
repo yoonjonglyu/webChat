@@ -2,7 +2,7 @@ import React from 'react';
 import { Socket } from 'socket.io-client';
 
 import ChatRoom from './chatRoom/chatRoom';
-import SendForm from './sendForm';
+import SendForm from './sendMessage/sendForm';
 
 interface ChatWindowProps {
     socket: Socket

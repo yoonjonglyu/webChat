@@ -1,10 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Socket } from '../socket';
 
-import SendForm from './sendForm';
+import { Socket } from '../../socket';
 
-describe('sendForm 채팅 메시지 입력 폼', () => {
+import SendPoto from './sendPoto';
+
+describe('sendPoto', () => {
     let socket: any;
     beforeAll((done) => {
         socket = Socket;
@@ -13,10 +14,16 @@ describe('sendForm 채팅 메시지 입력 폼', () => {
     afterAll(() => {
         socket.close();
     });
+    test('render', () => {
+        render(
+            <SendPoto socket={socket} />
+        );
 
+        expect(screen.getByRole('img')).toBeVisible();
+    });
     test('socket', (done) => {
         render(
-            <SendForm socket={socket} />
+            <SendPoto socket={socket} />
         );
         socket.emit('join', {
             socketIdx: socket.id,
@@ -26,12 +33,12 @@ describe('sendForm 채팅 메시지 입력 폼', () => {
             idx: string,
             message: string
         }) => {
-            expect(msg.message).toBe('메시지 전송 테스트');
+            expect(msg.message).toBe('base64 전송 테스트');
             done();
         });
         socket.emit('send', {
             socketIdx: socket.id,
-            message: '메시지 전송 테스트',
+            message: 'base64 전송 테스트',
             room: '#1'
         });
     });
