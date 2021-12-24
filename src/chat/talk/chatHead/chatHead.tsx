@@ -13,7 +13,7 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
         room,
         socket
     } = props;
-    const [headCount, setHeadCount] = useState(0);
+    const [headCount, setHeadCount] = useState<Array<string>>([]);
     useEffect(() => {
         const Events = new ChatEvents(socket);
         Events.getHeadCount(room, setHeadCount);
@@ -48,7 +48,7 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
                             color: "rgb(57, 80, 76)"
                         }}
                     >
-                        ({headCount})
+                        ({headCount.length})
                     </span>
                 </h2>
             </nav>
