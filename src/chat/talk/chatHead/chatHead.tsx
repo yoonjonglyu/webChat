@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
+
+import ChatEvents from '../../lib/chatEvents';
 
 interface ChatHeadProps {
     room: string
@@ -11,6 +13,12 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
         room,
         socket
     } = props;
+    const [headCount, setHeadCount] = useState(0);
+    useEffect(() => {
+        const Events = new ChatEvents(socket);
+        Events.getHeadCount(room, setHeadCount);
+        return () => Events.clearHeadCount();
+    });
 
     return (
         <div
@@ -35,7 +43,13 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
                     }}
                 >
                     {room}
-                    <span> (650)</span>
+                    <span
+                        style={{
+                            color: "rgb(57, 80, 76)"
+                        }}
+                    >
+                        ({headCount})
+                    </span>
                 </h2>
             </nav>
             <button
@@ -51,7 +65,7 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
             >
                 X
             </button>
-        </div>
+        </div >
     )
 }
 
