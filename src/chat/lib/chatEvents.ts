@@ -41,14 +41,14 @@ class ChatEvents {
             room: room
         });
     }
-    sendImage(image: Blob) {
+    sendImage(image: Blob, room: string) {
         if (image.type.split('/')[0] === 'image') {
             const reader = new FileReader();
             reader.onload = (e: ProgressEvent<FileReader>) => {
                 this.socket.emit('send', {
                     socketIdx: this.socket.id,
                     message: `@$IMG ${e.target?.result}`,
-                    room: '#1'
+                    room: room
                 });
             }
             reader.readAsDataURL(image);
