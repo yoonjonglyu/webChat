@@ -64,7 +64,7 @@ class ChatEvents {
                     idx: '#system',
                     message: `${id} 님이 대화에 참여 하였습니다.`,
                 });
-                this.socket.emit('rooms');
+                this.socket.emit('headCount');
             }
         });
         this.socket.once('leaveRoom', (id: string) => {
@@ -73,7 +73,7 @@ class ChatEvents {
                     idx: '#system',
                     message: `${id} 님이 대화에서 나갔습니다.`,
                 });
-                this.socket.emit('rooms');
+                this.socket.emit('headCount');
             }
         });
     }
@@ -83,12 +83,12 @@ class ChatEvents {
         this.socket.removeAllListeners('leaveRoom');
     }
     getHeadCount(room: string, handleCount: (data: Array<string>) => void) {
-        this.socket.on('room', (data: { rooms: { [key: string]: Array<string> } }) => {
-            handleCount(data.rooms[room]);
+        this.socket.on('headCount', (data: { [key: string]: Array<string> }) => {
+            handleCount(data[room]);
         });
     }
     clearHeadCount() {
-        this.socket.removeAllListeners('room');
+        this.socket.removeAllListeners('headCount');
     }
 }
 
