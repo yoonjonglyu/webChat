@@ -22,6 +22,12 @@ class ChatEvents {
             cb();
         });
     }
+    getRooms(handleRooms: (data: Array<string>) => void) {
+        this.socket.once('rooms', (data: Array<string>) => {
+            handleRooms(data);
+        });
+        this.socket.emit('rooms');
+    }
     joinRoom(room: string) {
         this.socket.emit('join', {
             socketIdx: this.socket.id,
