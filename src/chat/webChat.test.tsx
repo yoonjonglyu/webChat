@@ -31,7 +31,6 @@ describe('webChat 채팅창', () => {
             room: '#1'
         });
     });
-
     test('render 연결중', () => {
         render(
             <WebChat socket={socket} />

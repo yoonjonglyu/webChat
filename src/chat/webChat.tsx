@@ -21,14 +21,11 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         setStep(step);
     }
 
+    const [rooms, setRooms] = useState<Array<string>>([]);
+    const Events = new ChatEvents(socket);
     useEffect(() => {
-        const Events = new ChatEvents(socket);
         Events.handleConnect(() => {
-            socket.emit('join', {
-                socketIdx: socket.id,
-                room: '#1'
-            });
-            handleStep(2);
+            Events.getRooms(setRooms);
         });
         Events.handleDisConnect(() => {
             handleStep(1);
@@ -40,6 +37,12 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             socket.close();
         }
     }, [socket]);
+    useEffect(() => {
+        if (rooms.length > 0) {
+            Events.joinRoom(rooms[0]);
+            handleStep(2);
+        }
+    }, [rooms]);
 
 
     return (
