@@ -9,10 +9,6 @@ describe('webChat 채팅창', () => {
     beforeAll((done) => {
         socket = Socket;
         socket.on('connect', done);
-        socket.emit('join', {
-            socketIdx: socket.id,
-            room: '#1'
-        });
     });
     afterAll(() => {
         socket.close();
