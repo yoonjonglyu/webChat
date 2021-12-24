@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Socket } from 'socket.io-client';
 
 import Loading from './loading';
@@ -6,6 +6,7 @@ import SendNickName from './sendNickName';
 import ChatWindow from './talk/chatWindow';
 
 import ChatEvents from './lib/chatEvents';
+import { RoomContext } from './store/room';
 
 interface WebChatProps {
     socket: Socket
@@ -17,12 +18,13 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         socket
     } = props;
     const [step, setStep] = useState(0);
+    const [rooms, setRooms] = useState<Array<string>>([]);
+    const { handleRoom } = useContext(RoomContext);
+    const Events = new ChatEvents(socket);
     const handleStep = (step: number) => {
         setStep(step);
     }
-
-    const [rooms, setRooms] = useState<Array<string>>([]);
-    const Events = new ChatEvents(socket);
+    
     useEffect(() => {
         Events.handleConnect(() => {
             Events.getRooms(setRooms);
@@ -40,11 +42,11 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     useEffect(() => {
         if (rooms.length > 0) {
             Events.joinRoom(rooms[0]);
+            handleRoom(rooms[0]);
             handleStep(2);
         }
     }, [rooms]);
-
-
+    
     return (
         <article style={{
             display: "flex",

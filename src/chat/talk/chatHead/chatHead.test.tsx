@@ -13,18 +13,14 @@ describe('chatHead', () => {
     afterAll(() => {
         socket.close();
     });
-    test('render', (done) => {
+    test('render', () => {
         render(
-            <ChatHead
-                room='#1'
-                socket={socket}
-            />
+            <ChatHead socket={socket} />
         );
 
         expect(screen.getByTestId('chat-head')).toBeInTheDocument();
         expect(screen.getByText('#1')).toBeInTheDocument();
         expect(screen.getByRole('button')).toHaveTextContent('X');
         expect(screen.getByText('(0)')).toBeInTheDocument();
-        done();
     });
 });

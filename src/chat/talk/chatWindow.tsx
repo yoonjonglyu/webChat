@@ -16,10 +16,7 @@ const ChatWindow: React.FC<ChatWindowProps> = (props) => {
 
     return (
         <>
-            <ChatHead
-                room={"#1"}
-                socket={socket}
-            />
+            <ChatHead socket={socket} />
             <ChatRoom socket={socket} />
             <SendForm socket={socket} />
         </>

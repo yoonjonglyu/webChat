@@ -3,6 +3,8 @@ import { io, Socket } from 'socket.io-client';
 
 import WebChat from './webChat';
 
+import RoomContextProvider from './store/room';
+
 interface TomatoProps {
     url: string
 }
@@ -26,7 +28,9 @@ const Tomato: React.FC<TomatoProps> = (props) => {
         <>
             {
                 socket !== null &&
-                <WebChat socket={socket} />
+                <RoomContextProvider>
+                    <WebChat socket={socket} />
+                </RoomContextProvider>
             }
         </>
     );
