@@ -14,13 +14,43 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
 
     return (
         <div
-            data-testId="chat-head"
+            data-testid="chat-head"
             style={{
-                height: "40px"
+                display: "flex",
+                height: "48px",
+                background: "rgb(230, 221, 196)"
             }}
         >
-            {room}
-            <button type="button">나가기</button>
+            <nav
+                style={{
+                    display: "flex",
+                    flex: "1"
+                }}
+            >
+                <h2
+                    style={{
+                        margin: "12px",
+                        fontSize: "1rem",
+                        color: "rgb(103, 137, 131)"
+                    }}
+                >
+                    {room}
+                    <span> (650)</span>
+                </h2>
+            </nav>
+            <button
+                type="button"
+                title="방에서 나가기"
+                style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    color: "#464545",
+                }}
+            >
+                X
+            </button>
         </div>
     )
 }

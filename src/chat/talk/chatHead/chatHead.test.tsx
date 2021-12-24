@@ -23,6 +23,6 @@ describe('chatHead', () => {
 
         expect(screen.getByTestId('chat-head')).toBeInTheDocument();
         expect(screen.getByText('#1')).toBeInTheDocument();
-        expect(screen.getByRole('button')).toHaveTextContent('나가기');
+        expect(screen.getByRole('button')).toHaveTextContent('X');
     });
 });
