@@ -19,7 +19,7 @@ const SendPoto: React.FC<SendPotoProps> = ({ socket }) => {
             const Events = new ChatEvents(socket);
             const result = Events.sendImage(file[0], room);
             if (!result) {
-                alert('이미지 파일이 아닙니다.');
+                alert('500kb 이하의 이미지 파일만 전송 할 수 있습니다.');
             }
         }
         e.target.value = '';
