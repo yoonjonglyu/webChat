@@ -4,9 +4,11 @@ import { Socket } from 'socket.io-client';
 import Loading from './loading';
 import SendNickName from './sendNickName';
 import ChatWindow from './talk/chatWindow';
+import Modal from './modal';
 
 import ChatEvents from './lib/chatEvents';
 import { RoomContext } from './store/room';
+import { ModalContext } from './store/modalContext';
 
 interface WebChatProps {
     socket: Socket
@@ -17,6 +19,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     const {
         socket
     } = props;
+    const { isModal } = useContext(ModalContext);
     const [step, setStep] = useState(0);
     const [rooms, setRooms] = useState<Array<string>>([]);
     const { handleRoom } = useContext(RoomContext);
@@ -24,7 +27,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     const handleStep = (step: number) => {
         setStep(step);
     }
-    
+
     useEffect(() => {
         Events.handleConnect(() => {
             Events.getRooms(setRooms);
@@ -46,7 +49,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             handleStep(2);
         }
     }, [rooms]);
-    
+
     return (
         <article style={{
             display: "flex",
@@ -58,6 +61,10 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         }}
             onClick={() => handleStep(2)}
         >
+            {
+                isModal &&
+                <Modal />
+            }
             {
                 step < 2 &&
                 <Loading state={step} />
