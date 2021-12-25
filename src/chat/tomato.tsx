@@ -4,6 +4,7 @@ import { io, Socket } from 'socket.io-client';
 import WebChat from './webChat';
 
 import RoomContextProvider from './store/room';
+import ModalContextProvider from './store/modalContext';
 
 interface TomatoProps {
     url: string
@@ -28,9 +29,11 @@ const Tomato: React.FC<TomatoProps> = (props) => {
         <>
             {
                 socket !== null &&
-                <RoomContextProvider>
-                    <WebChat socket={socket} />
-                </RoomContextProvider>
+                <ModalContextProvider>
+                    <RoomContextProvider>
+                        <WebChat socket={socket} />
+                    </RoomContextProvider>
+                </ModalContextProvider>
             }
         </>
     );

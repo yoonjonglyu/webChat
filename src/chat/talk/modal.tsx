@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { ModalContext } from '../store/modalContext';
 
 interface ModalProps {
 
 }
 
 const Modal: React.FC<ModalProps> = () => {
+    const { handleIsModal, modalContents } = useContext(ModalContext);
+    const closeModal = () => {
+        handleIsModal(false);
+    }
+
     return (
         <article
             style={{
@@ -16,11 +23,12 @@ const Modal: React.FC<ModalProps> = () => {
                 height: "100%",
                 background: "rgb(0,0,0, 0.5)",
             }}
+            onClick={closeModal}
         >
             <div data-testid="modal-box"
                 style={{
                     display: "flex",
-                    flexFlow: "column",
+                    flexFlow: "column wrap",
                     minWidth: "50%",
                     minHeight: "30%",
                     margin: "0 auto",
@@ -28,6 +36,7 @@ const Modal: React.FC<ModalProps> = () => {
                     borderRadius: "3px",
                 }}
             >
+                {modalContents}
             </div>
         </article>
     );

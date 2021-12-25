@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { ModalContext } from '../../store/modalContext';
 
 interface ChatMessageProps {
     messages: Array<{
@@ -14,6 +16,19 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
         messages,
         userId
     } = props;
+    const { handleIsModal, handleModal } = useContext(ModalContext);
+    const openImageModal = (src: string) => {
+        handleModal(
+            <img
+                src={src}
+                style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%"
+                }}
+            />
+        );
+        handleIsModal(true);
+    }
 
     return (
         <>
@@ -83,6 +98,7 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                                         <img
                                             src={current.message.slice(5)}
                                             style={messageStyle}
+                                            onClick={() => openImageModal(current.message.slice(5))}
                                         />
                                 }
                                 {
