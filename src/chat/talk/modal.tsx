@@ -9,15 +9,25 @@ const Modal: React.FC<ModalProps> = () => {
         <article
             style={{
                 position: "absolute",
+                display: "flex",
+                flexFlow: "column",
+                justifyContent: "center",
                 width: "100%",
                 height: "100%",
                 background: "rgb(0,0,0, 0.5)",
             }}
         >
-            <div data-testid="modal-box">
-                <h3 data-testid="modal-title">title</h3>
-                <p data-testid="modal-message">메시지</p>
-                <button type="button">확인</button>
+            <div data-testid="modal-box"
+                style={{
+                    display: "flex",
+                    flexFlow: "column",
+                    minWidth: "50%",
+                    minHeight: "30%",
+                    margin: "0 auto",
+                    background: "#bb5f5f",
+                    borderRadius: "3px",
+                }}
+            >
             </div>
         </article>
     );

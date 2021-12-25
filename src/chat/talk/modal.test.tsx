@@ -11,8 +11,5 @@ describe('채팅 모달', () => {
 
         expect(screen.getByRole('article')).toBeInTheDocument();
         expect(screen.getByTestId('modal-box')).toBeInTheDocument();
-        expect(screen.getByTestId('modal-title')).toBeInTheDocument();
-        expect(screen.getByTestId('modal-message')).toBeInTheDocument();
-        expect(screen.getByRole('button')).toBeInTheDocument();
     });
 });
