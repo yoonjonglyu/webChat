@@ -41,8 +41,9 @@ class ChatEvents {
             room: room
         });
     }
-    sendImage(image: Blob, room: string) {
-        if (image.type.split('/')[0] === 'image') {
+    sendImage(image: Blob, room: string, imgSize: number = 500 * 1024) {
+        if (image.type.split('/')[0] === 'image' && image.size <= imgSize) {
+            console.log(image);
             const reader = new FileReader();
             reader.onload = (e: ProgressEvent<FileReader>) => {
                 this.socket.emit('send', {
