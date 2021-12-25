@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Socket } from 'socket.io-client';
 
 import ChatEvents from '../../lib/chatEvents';
-import { RoomContext } from '../../store/room';
+import { RoomContext } from '../../store/roomContext';
 
 interface ChatHeadProps {
     socket: Socket

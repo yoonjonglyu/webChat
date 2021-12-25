@@ -4,7 +4,7 @@ import { Socket } from 'socket.io-client';
 import SendPoto from './sendPoto';
 
 import ChatEvents from '../../lib/chatEvents';
-import { RoomContext } from '../../store/room';
+import { RoomContext } from '../../store/roomContext';
 
 interface SendFormProps {
     socket: Socket

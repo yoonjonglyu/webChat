@@ -7,7 +7,7 @@ import ChatWindow from './talk/chatWindow';
 import Modal from './modal';
 
 import ChatEvents from './lib/chatEvents';
-import { RoomContext } from './store/room';
+import { RoomContext } from './store/roomContext';
 import { ModalContext } from './store/modalContext';
 
 interface WebChatProps {

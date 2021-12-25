@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 
 import WebChat from './webChat';
 
-import RoomContextProvider from './store/room';
+import RoomContextProvider from './store/roomContext';
 import ModalContextProvider from './store/modalContext';
 
 interface TomatoProps {

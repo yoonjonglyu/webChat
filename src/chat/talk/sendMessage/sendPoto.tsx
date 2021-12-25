@@ -4,7 +4,7 @@ import { Socket } from 'socket.io-client';
 import PotoIcon from '../../assets/poto.png';
 
 import ChatEvents from '../../lib/chatEvents';
-import { RoomContext } from '../../store/room';
+import { RoomContext } from '../../store/roomContext';
 import { ModalContext } from '../../store/modalContext';
 
 interface SendPotoProps {
