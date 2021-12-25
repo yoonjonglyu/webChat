@@ -29,6 +29,7 @@ const Modal: React.FC<ModalProps> = () => {
                 style={{
                     display: "flex",
                     flexFlow: "column wrap",
+                    justifyContent: "center",
                     minWidth: "50%",
                     minHeight: "30%",
                     margin: "0 auto",
