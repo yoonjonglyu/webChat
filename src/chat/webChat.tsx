@@ -12,31 +12,38 @@ import { ModalContext } from './store/modalContext';
 
 interface WebChatProps {
     socket: Socket
+    config?: ConfigProps
+}
+interface ConfigProps {
+    imageSize?: number
 }
 
 
 const WebChat: React.FC<WebChatProps> = (props) => {
     const {
-        socket
+        socket,
+        config
     } = props;
     const { isModal } = useContext(ModalContext);
+    const { handleRoom, handleImageSize } = useContext(ConfigContext);
+    useEffect(() => {
+        if(config?.imageSize){
+            handleImageSize(config.imageSize);
+        }
+    }, []);
+
+    const Events = new ChatEvents(socket);
     const [step, setStep] = useState(0);
     const [rooms, setRooms] = useState<Array<string>>([]);
-    const { handleRoom } = useContext(ConfigContext);
-    const Events = new ChatEvents(socket);
-    const handleStep = (step: number) => {
-        setStep(step);
-    }
-
     useEffect(() => {
         Events.handleConnect(() => {
             Events.getRooms(setRooms);
         });
         Events.handleDisConnect(() => {
-            handleStep(1);
+            setStep(1);
         });
         Events.handleError(() => {
-            handleStep(1);
+            setStep(1);
         });
         return () => {
             socket.close();
@@ -46,7 +53,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         if (rooms.length > 0) {
             Events.joinRoom(rooms[0]);
             handleRoom(rooms[0]);
-            handleStep(2);
+            setStep(2);
         }
     }, [rooms]);
 
@@ -59,7 +66,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             position: "relative",
             border: "1px solid #678983",
         }}
-            onClick={() => handleStep(2)}
+            onClick={() => setStep(2)}
         >
             {
                 isModal &&

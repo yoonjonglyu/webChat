@@ -63,6 +63,7 @@ const Main: React.FC<MainProps> = () => {
             >
                 <Tomato
                     url={'http://localhost:444/webChat' || 'https://chatting-serve.herokuapp.com/webChat'}
+                    imageSize={3}
                 />
             </section>
         </Layout>
