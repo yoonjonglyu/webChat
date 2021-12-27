@@ -41,17 +41,13 @@ class ChatEvents {
             room: room
         });
     }
-    sendImage(image: Blob, room: string, imgSize: number = 500 * 1024) {
+    sendImage(image: Blob, room: string, imgSize: number = 500 * 1024 * 1024) {
         if (image.type.split('/')[0] === 'image' && image.size <= imgSize) {
-            const reader = new FileReader();
-            reader.onload = (e: ProgressEvent<FileReader>) => {
-                this.socket.emit('send', {
-                    socketIdx: this.socket.id,
-                    message: `@$IMG ${e.target?.result}`,
-                    room: room
-                });
-            }
-            reader.readAsDataURL(image);
+            this.socket.emit('sendImage', {
+                socketIdx: this.socket.id,
+                message: image,
+                room: room
+            });
 
             return true;
         } else {
@@ -59,6 +55,16 @@ class ChatEvents {
         }
     }
     receiveMessages(handleMessage: (msg: { idx: string, message: string }) => void) {
+        this.socket.once('receiveImage', (data: { idx: string, message: string }) => {
+            const reader = new FileReader();
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                handleMessage({
+                    idx: data.idx,
+                    message: `@$IMG ${e.target?.result}`
+                });
+            }
+            reader.readAsDataURL(new Blob([data.message], { type: 'images/png' }));
+        });
         this.socket.once('receive', (data: { idx: string, message: string }) => {
             if (this.socket.connected) {
                 handleMessage(data);
@@ -87,6 +93,7 @@ class ChatEvents {
         this.socket.removeAllListeners('receive');
         this.socket.removeAllListeners('joinRoom');
         this.socket.removeAllListeners('leaveRoom');
+        this.socket.removeAllListeners('receiveImage');
     }
     getHeadCount(room: string, handleCount: (data: Array<string>) => void) {
         this.socket.on('headCount', (data: { [key: string]: Array<string> }) => {
