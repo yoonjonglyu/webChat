@@ -4,7 +4,7 @@ import { Socket } from 'socket.io-client';
 import PotoIcon from '../../assets/poto.png';
 
 import ChatEvents from '../../lib/chatEvents';
-import { RoomContext } from '../../store/roomContext';
+import { ConfigContext } from '../../store/configContext';
 import { ModalContext } from '../../store/modalContext';
 
 interface SendPotoProps {
@@ -12,7 +12,7 @@ interface SendPotoProps {
 }
 
 const SendPoto: React.FC<SendPotoProps> = ({ socket }) => {
-    const { room } = useContext(RoomContext);
+    const { room } = useContext(ConfigContext);
     const { handleIsModal, handleModal } = useContext(ModalContext);
     const openModal = (message: string) => {
         handleModal(

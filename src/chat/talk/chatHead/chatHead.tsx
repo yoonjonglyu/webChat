@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Socket } from 'socket.io-client';
 
 import ChatEvents from '../../lib/chatEvents';
-import { RoomContext } from '../../store/roomContext';
+import { ConfigContext } from '../../store/configContext';
 
 interface ChatHeadProps {
     socket: Socket
@@ -13,7 +13,7 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
         socket
     } = props;
     const [headCount, setHeadCount] = useState<Array<string>>([]);
-    const { room } = useContext(RoomContext);
+    const { room } = useContext(ConfigContext);
 
     useEffect(() => {
         const Events = new ChatEvents(socket);

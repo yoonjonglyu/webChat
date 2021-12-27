@@ -1,15 +1,15 @@
 import React from 'react';
 
 import ModalContextProvider from './modalContext';
-import RoomContextProvider from './roomContext';
+import ConfigContextProvider from './configContext';
 
 const RootContextProvider: React.FC = ({ children }) => {
     return (
-        <RoomContextProvider>
+        <ConfigContextProvider>
             <ModalContextProvider>
                 {children}
             </ModalContextProvider>
-        </RoomContextProvider>
+        </ConfigContextProvider>
     );
 };
 

@@ -7,7 +7,7 @@ import ChatWindow from './talk/chatWindow';
 import Modal from './modal';
 
 import ChatEvents from './lib/chatEvents';
-import { RoomContext } from './store/roomContext';
+import { ConfigContext } from './store/configContext';
 import { ModalContext } from './store/modalContext';
 
 interface WebChatProps {
@@ -22,7 +22,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     const { isModal } = useContext(ModalContext);
     const [step, setStep] = useState(0);
     const [rooms, setRooms] = useState<Array<string>>([]);
-    const { handleRoom } = useContext(RoomContext);
+    const { handleRoom } = useContext(ConfigContext);
     const Events = new ChatEvents(socket);
     const handleStep = (step: number) => {
         setStep(step);

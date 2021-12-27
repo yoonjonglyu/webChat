@@ -4,7 +4,7 @@ import { Socket } from 'socket.io-client';
 import SendPoto from './sendPoto';
 
 import ChatEvents from '../../lib/chatEvents';
-import { RoomContext } from '../../store/roomContext';
+import { ConfigContext } from '../../store/configContext';
 
 interface SendFormProps {
     socket: Socket
@@ -15,7 +15,7 @@ const SendForm: React.FC<SendFormProps> = (props) => {
         socket
     } = props;
     const [message, setMessage] = useState('');
-    const { room } = useContext(RoomContext);
+    const { room } = useContext(ConfigContext);
     
     const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

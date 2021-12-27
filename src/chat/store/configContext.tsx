@@ -1,19 +1,19 @@
 import React, { createContext, useState } from 'react';
 
-export const RoomContext = createContext({
+export const ConfigContext = createContext({
   room: "",
   handleRoom: (data: string) => { }
 });
 
-const RoomContextProvider: React.FC = ({ children }) => {
+const ConfigContextProvider: React.FC = ({ children }) => {
   const [room, setRoom] = useState('');
   const handleRoom = (data: string) => setRoom(data);
 
   return (
-    <RoomContext.Provider value={{ room, handleRoom }}>
+    <ConfigContext.Provider value={{ room, handleRoom }}>
       {children}
-    </RoomContext.Provider>
+    </ConfigContext.Provider>
   );
 };
 
-export default RoomContextProvider;
+export default ConfigContextProvider;
