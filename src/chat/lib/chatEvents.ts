@@ -41,7 +41,7 @@ class ChatEvents {
             room: room
         });
     }
-    sendImage(image: Blob, room: string, imgSize: number = 500 * 1024 * 1024) {
+    sendImage(image: Blob, room: string, imgSize: number = 500 * 1024) {
         if (image.type.split('/')[0] === 'image' && image.size <= imgSize) {
             this.socket.emit('sendImage', {
                 socketIdx: this.socket.id,
