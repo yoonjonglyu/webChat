@@ -18,8 +18,40 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
     const [headCount, setHeadCount] = useState<Array<string>>([]);
     const { room } = useContext(ConfigContext);
     const { handleIsModal, handleModal } = useContext(ModalContext);
-
-    const openUserList = () => handleIsModal(true);
+    const headCountModal = () => {
+        handleModal(
+            <ul
+                style={{
+                    display: "flex",
+                    flexFlow: "column nowrap",
+                    flex: "1",
+                    margin: "0",
+                    padding: "0",
+                    listStyle: "none",
+                    overflow: "auto",
+                }}
+            >
+                {
+                    headCount.map((id, idx) =>
+                        <li
+                            key={idx}
+                            style={{
+                                margin: "8px",
+                                textAlign: "center",
+                                color: "#e4e2b0"
+                            }}
+                        >
+                            {idx + 1} : {id}
+                        </li>
+                    )
+                }
+            </ul>
+        );
+    }
+    const openUserList = () => {
+        headCountModal();
+        handleIsModal(true);
+    }
 
     useEffect(() => {
         if (room !== '') {
@@ -29,34 +61,7 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
     }, [room]);
     useEffect(() => {
         if (headCount.length > 0) {
-            handleModal(
-                <ul
-                    style={{
-                        display: "flex",
-                        flexFlow: "column nowrap",
-                        flex: "1",
-                        margin: "0",
-                        padding: "0",
-                        listStyle: "none",
-                        overflow: "auto",
-                    }}
-                >
-                    {
-                        headCount.map((id, idx) =>
-                            <li
-                                key={idx}
-                                style={{
-                                    margin: "8px",
-                                    textAlign: "center",
-                                    color: "#e4e2b0"
-                                }}
-                            >
-                             {idx + 1} : {id}
-                            </li>
-                        )
-                    }
-                </ul>
-            );
+            headCountModal();
         }
     }, [headCount]);
 
