@@ -27,20 +27,31 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
             Events.getHeadCount(room, setHeadCount);
         }
     }, [room]);
-    
     useEffect(() => {
         if (headCount.length > 0) {
             handleModal(
                 <ul
                     style={{
+                        display: "flex",
+                        flexFlow: "column nowrap",
+                        flex: "1",
                         margin: "0",
-                        listStyle: "none"
+                        padding: "0",
+                        listStyle: "none",
+                        overflow: "auto",
                     }}
                 >
                     {
                         headCount.map((id, idx) =>
-                            <li key={idx}>
-                                {id}
+                            <li
+                                key={idx}
+                                style={{
+                                    margin: "8px",
+                                    textAlign: "center",
+                                    color: "#e4e2b0"
+                                }}
+                            >
+                             {idx + 1} : {id}
                             </li>
                         )
                     }
@@ -86,7 +97,7 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
                             color: "rgb(57, 80, 76)"
                         }}
                     >
-                        ({headCount?.length})
+                        ({headCount.length})
                     </span>
                 </h2>
             </nav>
