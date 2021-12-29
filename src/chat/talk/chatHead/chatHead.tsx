@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Socket } from 'socket.io-client';
 
+import UserIcon from '../../assets/user.png';
+
 import ChatEvents from '../../lib/chatEvents';
 import { ConfigContext } from '../../store/configContext';
+import { ModalContext } from '../../store/modalContext';
 
 interface ChatHeadProps {
     socket: Socket
@@ -14,12 +17,37 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
     } = props;
     const [headCount, setHeadCount] = useState<Array<string>>([]);
     const { room } = useContext(ConfigContext);
+    const { handleIsModal, handleModal } = useContext(ModalContext);
+
+    const openUserList = () => handleIsModal(true);
 
     useEffect(() => {
-        const Events = new ChatEvents(socket);
-        Events.getHeadCount(room, setHeadCount);
-        return () => Events.clearHeadCount();
-    });
+        if (room !== '') {
+            const Events = new ChatEvents(socket);
+            Events.getHeadCount(room, setHeadCount);
+        }
+    }, [room]);
+    
+    useEffect(() => {
+        if (headCount.length > 0) {
+            handleModal(
+                <ul
+                    style={{
+                        margin: "0",
+                        listStyle: "none"
+                    }}
+                >
+                    {
+                        headCount.map((id, idx) =>
+                            <li key={idx}>
+                                {id}
+                            </li>
+                        )
+                    }
+                </ul>
+            );
+        }
+    }, [headCount]);
 
     return (
         <div
@@ -36,9 +64,18 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
                     flex: "1"
                 }}
             >
+                <img
+                    src={UserIcon}
+                    style={{
+                        width: "30px",
+                        height: "30px",
+                        margin: "9px",
+                    }}
+                    onClick={openUserList}
+                />
                 <h2
                     style={{
-                        margin: "12px",
+                        margin: "12px 0",
                         fontSize: "1rem",
                         color: "rgb(103, 137, 131)"
                     }}
@@ -49,7 +86,7 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
                             color: "rgb(57, 80, 76)"
                         }}
                     >
-                        ({headCount.length})
+                        ({headCount?.length})
                     </span>
                 </h2>
             </nav>
