@@ -97,11 +97,10 @@ class ChatEvents {
     }
     getHeadCount(room: string, handleCount: (data: Array<string>) => void) {
         this.socket.on('headCount', (data: { [key: string]: Array<string> }) => {
-            handleCount(data[room]);
+            if (this.socket.connected) {
+                handleCount(data[room]);
+            }
         });
-    }
-    clearHeadCount() {
-        this.socket.removeAllListeners('headCount');
     }
 }
 
