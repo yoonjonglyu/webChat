@@ -1,11 +1,20 @@
 import React from 'react';
 
 interface PartnerMessageProps {
+    idx: string
     message: string
     openImageModal: Function
+    time: string
 }
 
-const PartnerMessage: React.FC<PartnerMessageProps> = ({ message, openImageModal }) => {
+const PartnerMessage: React.FC<PartnerMessageProps> = (props) => {
+    const {
+        idx,
+        message,
+        openImageModal,
+        time
+    } = props;
+
     const messageStyle: React.CSSProperties = {
         maxWidth: "58%",
         padding: "8px",
@@ -16,25 +25,53 @@ const PartnerMessage: React.FC<PartnerMessageProps> = ({ message, openImageModal
         background: "#eeeeee",
         borderRadius: "6px",
     };
+    const boxStyle: React.CSSProperties = {
+        display: "flex",
+        flex: "1",
+        flexFlow: "row",
+        width: "100%",
+        margin: 0,
+        marginRight: "auto"
+    };
 
     return (
         <>
-            {
-                message.slice(0, 5) !== '@$IMG' ?
-                    <span
-                        data-testid="partner"
-                        style={messageStyle}
-                    >
-                        {message}
-                    </span > :
-                    <img
-                        data-testid="partner-image"
-                        src={message.slice(5)}
-                        style={messageStyle}
-                        onClick={() => openImageModal(message.slice(5))}
-                        alt="전송된 이미지"
-                    />
-            }
+            <span
+                style={{
+                    paddingLeft: "8px",
+                    fontSize: "0.8rem",
+                }}
+            >
+                {idx}
+            </span>
+            <p style={boxStyle}>
+                {
+                    message.slice(0, 5) !== '@$IMG' ?
+                        <span
+                            data-testid="partner"
+                            style={messageStyle}
+                        >
+                            {message}
+                        </span > :
+                        <img
+                            data-testid="partner-image"
+                            src={message.slice(5)}
+                            style={messageStyle}
+                            onClick={() => openImageModal(message.slice(5))}
+                            alt="전송된 이미지"
+                        />
+                }
+                <time
+                    style={{
+                        display: "flex",
+                        alignItems: "flex-end",
+                        marginBottom: "8px",
+                        fontSize: "0.7rem",
+                    }}
+                >
+                    {time}
+                </time>
+            </p>
         </>
     );
 };
