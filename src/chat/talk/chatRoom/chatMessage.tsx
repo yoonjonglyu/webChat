@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import SystemMessage from './systemMessage';
+import PartnerMessage from './partnerMessage';
 
 import { ModalContext } from '../../store/modalContext';
 
@@ -43,7 +44,7 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                         fontSize: "1rem",
                         color: "#1b1b1b",
                         wordBreak: "break-word",
-                        background: "rgb(0 0 0 / 19%)",
+                        background: "#fff",
                         borderRadius: "6px",
                     };
                     const boxStyle: React.CSSProperties = {
@@ -59,7 +60,6 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                         boxStyle.flexFlow = "row-reverse";
                     }
                     else if (current.idx !== '#system') {
-                        messageStyle.background = "#eeeeee";
                         boxStyle.marginRight = "auto";
                         boxStyle.flexFlow = "row";
                     }
@@ -91,22 +91,44 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                                     />
                                 }
                                 {
-                                    current.message.slice(0, 5) !== '@$IMG' ?
-                                        current.idx !== '#system' &&
-                                        <span style={messageStyle}>
-                                            {current.message}
-                                        </span>
-                                        :
-                                        current.idx !== '#system' &&
+                                    current.idx !== '#system' && current.idx !== userId &&
+                                    (current.message.slice(0, 5) !== '@$IMG' ?
+                                        <PartnerMessage
+                                            message={current.message}
+                                        /> :
                                         <img
                                             src={current.message.slice(5)}
                                             style={messageStyle}
                                             onClick={() => openImageModal(current.message.slice(5))}
-                                        />
+                                        />)
+
+                                }
+                                {
+                                    current.idx !== '#system' && current.idx === userId &&
+                                    (current.message.slice(0, 5) !== '@$IMG' ?
+                                        <span
+                                            style={{
+                                                maxWidth: "58%",
+                                                padding: "8px",
+                                                margin: "8px",
+                                                fontSize: "1rem",
+                                                color: "#1b1b1b",
+                                                wordBreak: "break-word",
+                                                background: "tomato",
+                                                borderRadius: "6px",
+                                            }}
+                                        >
+                                            {current.message}
+                                        </span> :
+                                        <img
+                                            src={current.message.slice(5)}
+                                            style={messageStyle}
+                                            onClick={() => openImageModal(current.message.slice(5))}
+                                        />)
                                 }
                                 {
                                     current.idx !== '#system' &&
-                                    <time
+                                    < time
                                         style={{
                                             display: "flex",
                                             alignItems: "flex-end",
