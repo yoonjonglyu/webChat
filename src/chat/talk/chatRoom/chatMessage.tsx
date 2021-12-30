@@ -92,15 +92,10 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                                 }
                                 {
                                     current.idx !== '#system' && current.idx !== userId &&
-                                    (current.message.slice(0, 5) !== '@$IMG' ?
-                                        <PartnerMessage
-                                            message={current.message}
-                                        /> :
-                                        <img
-                                            src={current.message.slice(5)}
-                                            style={messageStyle}
-                                            onClick={() => openImageModal(current.message.slice(5))}
-                                        />)
+                                    <PartnerMessage
+                                        message={current.message}
+                                        openImageModal={openImageModal}
+                                    />
 
                                 }
                                 {
