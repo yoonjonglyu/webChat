@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import PartnerMessage from './partnerMessage';
 
-describe('시스템 메시지', () => {
+describe('파트너 메시지', () => {
     test('render text', () => {
         render(
             <PartnerMessage
