@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 
+import SystemMessage from './systemMessage';
+
 import { ModalContext } from '../../store/modalContext';
 
 interface ChatMessageProps {
@@ -51,13 +53,6 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                         width: "100%",
                         margin: 0,
                     };
-                    if (current.idx === '#system') {
-                        messageStyle.maxWidth = "100%";
-                        messageStyle.textAlign = "center";
-                        messageStyle.color = "rgb(98 14 14)";
-                        messageStyle.fontSize = "0.9rem";
-                        messageStyle.margin = "6px";
-                    }
                     if (current.idx === userId) {
                         messageStyle.background = "tomato";
                         boxStyle.marginLeft = "auto";
@@ -90,11 +85,19 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                             }
                             <p style={boxStyle}>
                                 {
+                                    current.idx === '#system' &&
+                                    <SystemMessage
+                                        message={current.message}
+                                    />
+                                }
+                                {
                                     current.message.slice(0, 5) !== '@$IMG' ?
+                                        current.idx !== '#system' &&
                                         <span style={messageStyle}>
                                             {current.message}
                                         </span>
                                         :
+                                        current.idx !== '#system' &&
                                         <img
                                             src={current.message.slice(5)}
                                             style={messageStyle}
