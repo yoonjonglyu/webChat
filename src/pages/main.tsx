@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import StyledComponents from 'styled-components'
+import StyledComponents, { createGlobalStyle } from 'styled-components'
 
 import Layout from '../components/layout';
 import Tomato from '../chat/tomato';
 
+const CommonStyle = createGlobalStyle`
+    @media (max-width: 700px){   
+    .widget {
+        display: none;
+    }
+    }
+`;
 const Widget = StyledComponents.section`
     position: absolute;
     right: 10px;
@@ -31,7 +38,8 @@ const Main: React.FC<MainProps> = () => {
 
     return (
         <Layout>
-            <Widget>
+            <CommonStyle />
+            <Widget className='widget'>
                 <WidgetList>
                     <li><h2>container width</h2></li>
                     <li><span>size: {container}px</span></li>
