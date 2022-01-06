@@ -13,24 +13,6 @@ describe('webChat 채팅창', () => {
     afterAll(() => {
         socket.close();
     });
-    test('socket', (done) => {
-        socket.emit('join', {
-            socketIdx: socket.id,
-            room: '#1'
-        });
-        socket.on('receive', (msg: {
-            idx: string,
-            message: string
-        }) => {
-            expect(msg.message).toBe('테스트 메시지입니다.');
-            done();
-        });
-        socket.emit('send', {
-            socketIdx: socket.id,
-            message: '테스트 메시지입니다.',
-            room: '#1'
-        });
-    });
     test('render 연결중', () => {
         render(
             <WebChat socket={socket} />
@@ -43,7 +25,7 @@ describe('webChat 채팅창', () => {
             <WebChat socket={socket} />
         );
         expect(screen.getByRole('article')).toBeVisible();
-        fireEvent.click(screen.getByRole('article'));
+        fireEvent.click(screen.getByText('#1'));
         expect(await screen.findByTestId('chat-room')).toBeVisible();
         expect(await screen.findByTestId('chat-form')).toBeVisible();
         expect(await screen.findByTestId('chat-input')).toBeVisible();

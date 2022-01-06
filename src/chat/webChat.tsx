@@ -3,6 +3,7 @@ import { Socket } from 'socket.io-client';
 
 import Loading from './loading';
 import SendNickName from './sendNickName';
+import RoomList from './roomList';
 import ChatWindow from './talk/chatWindow';
 import Modal from './modal';
 
@@ -27,7 +28,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     const { isModal } = useContext(ModalContext);
     const { handleRoom, handleImageSize } = useContext(ConfigContext);
     useEffect(() => {
-        if(config?.imageSize){
+        if (config?.imageSize) {
             handleImageSize(config.imageSize);
         }
     }, []);
@@ -51,9 +52,13 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     }, [socket]);
     useEffect(() => {
         if (rooms.length > 0) {
-            Events.joinRoom(rooms[0]);
-            handleRoom(rooms[0]);
-            setStep(2);
+            if (rooms.length === 1) {
+                Events.joinRoom(rooms[0]);
+                handleRoom(rooms[0]);
+                setStep(5);
+            } else {
+                setStep(3);
+            }
         }
     }, [rooms]);
 
@@ -66,7 +71,6 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             position: "relative",
             border: "1px solid #678983",
         }}
-            onClick={() => setStep(2)}
         >
             {
                 isModal &&
@@ -78,9 +82,18 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             }
             {
                 step === 3 &&
+                <RoomList
+                    rooms={rooms}
+                    socket={socket}
+                    handleStep={setStep}
+                />
+            }
+            {
+                step === 4 &&
                 <SendNickName />
             }
             <ChatWindow socket={socket} />
+
         </article >
     );
 }
