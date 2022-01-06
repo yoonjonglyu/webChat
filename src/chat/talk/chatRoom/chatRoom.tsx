@@ -28,19 +28,15 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         const Events = new ChatEvents(socket);
 
         Events.receiveMessages((msg: { idx: string, message: string }) => {
-            setChatLog([
-                ...chatLog,
+            setChatLog((arr) => [
+                ...arr,
                 {
                     ...msg,
                     time: `${new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}`
                 }
             ]);
         });
-
-        return () => {
-            Events.clearReceive();
-        }
-    });
+    }, []);
 
     const Room: any = useRef(null);
     useEffect(() => {

@@ -48,7 +48,7 @@ describe('chatRoom 채팅 메시지 보기', () => {
             expect(id).toBe(socket.id);
             done();
         });
-        socket.emit('leve', {
+        socket.emit('leave', {
             socketIdx: socket.id,
             room: '#1'
         });
