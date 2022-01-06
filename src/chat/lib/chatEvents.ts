@@ -55,7 +55,7 @@ class ChatEvents {
         }
     }
     receiveMessages(handleMessage: (msg: { idx: string, message: string }) => void) {
-        this.socket.once('receiveImage', (data: { idx: string, message: string }) => {
+        this.socket.on('receiveImage', (data: { idx: string, message: string }) => {
             const reader = new FileReader();
             reader.onload = (e: ProgressEvent<FileReader>) => {
                 handleMessage({
@@ -65,12 +65,12 @@ class ChatEvents {
             }
             reader.readAsDataURL(new Blob([data.message], { type: 'images/png' }));
         });
-        this.socket.once('receive', (data: { idx: string, message: string }) => {
+        this.socket.on('receive', (data: { idx: string, message: string }) => {
             if (this.socket.connected) {
                 handleMessage(data);
             }
         });
-        this.socket.once('joinRoom', (id: string) => {
+        this.socket.on('joinRoom', (id: string) => {
             if (this.socket.connected) {
                 handleMessage({
                     idx: '#system',
@@ -79,7 +79,7 @@ class ChatEvents {
                 this.socket.emit('headCount');
             }
         });
-        this.socket.once('leaveRoom', (id: string) => {
+        this.socket.on('leaveRoom', (id: string) => {
             if (this.socket.connected) {
                 handleMessage({
                     idx: '#system',
@@ -88,12 +88,6 @@ class ChatEvents {
                 this.socket.emit('headCount');
             }
         });
-    }
-    clearReceive() {
-        this.socket.removeAllListeners('receive');
-        this.socket.removeAllListeners('joinRoom');
-        this.socket.removeAllListeners('leaveRoom');
-        this.socket.removeAllListeners('receiveImage');
     }
     getHeadCount(room: string, handleCount: (data: Array<string>) => void) {
         this.socket.on('headCount', (data: { [key: string]: Array<string> }) => {
