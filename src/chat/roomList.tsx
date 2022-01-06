@@ -7,11 +7,10 @@ import { ConfigContext } from './store/configContext';
 interface RoomListProps {
     rooms: Array<string>
     socket: Socket
-    handleStep: Function;
 }
 
-const RoomList: React.FC<RoomListProps> = ({ rooms, socket, handleStep }) => {
-    const { handleRoom } = useContext(ConfigContext);
+const RoomList: React.FC<RoomListProps> = ({ rooms, socket }) => {
+    const { handleRoom, handleStep } = useContext(ConfigContext);
     const Events = new ChatEvents(socket);
 
     const joinRoom = (room: string) => {

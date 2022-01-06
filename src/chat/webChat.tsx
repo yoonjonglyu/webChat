@@ -26,7 +26,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         config
     } = props;
     const { isModal } = useContext(ModalContext);
-    const { handleRoom, handleImageSize } = useContext(ConfigContext);
+    const { handleRoom, handleImageSize, step, handleStep } = useContext(ConfigContext);
     useEffect(() => {
         if (config?.imageSize) {
             handleImageSize(config.imageSize);
@@ -34,17 +34,16 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     }, []);
 
     const Events = new ChatEvents(socket);
-    const [step, setStep] = useState(0);
     const [rooms, setRooms] = useState<Array<string>>([]);
     useEffect(() => {
         Events.handleConnect(() => {
             Events.getRooms(setRooms);
         });
         Events.handleDisConnect(() => {
-            setStep(1);
+            handleStep(1);
         });
         Events.handleError(() => {
-            setStep(1);
+            handleStep(1);
         });
         return () => {
             socket.close();
@@ -55,9 +54,9 @@ const WebChat: React.FC<WebChatProps> = (props) => {
             if (rooms.length === 1) {
                 Events.joinRoom(rooms[0]);
                 handleRoom(rooms[0]);
-                setStep(5);
+                handleStep(5);
             } else {
-                setStep(3);
+                handleStep(3);
             }
         }
     }, [rooms]);
@@ -85,7 +84,6 @@ const WebChat: React.FC<WebChatProps> = (props) => {
                 <RoomList
                     rooms={rooms}
                     socket={socket}
-                    handleStep={setStep}
                 />
             }
             {

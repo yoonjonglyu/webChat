@@ -24,7 +24,6 @@ describe('채팅방 리스트', () => {
                     '#4'
                 ]}
                 socket={socket}
-                handleStep={() => {}}
             />
         );
         expect(screen.getByTestId('room-list')).toBeInTheDocument();
@@ -44,7 +43,6 @@ describe('채팅방 리스트', () => {
                     '#4'
                 ]}
                 socket={socket}
-                handleStep={() => {}}
             />
         );
 
