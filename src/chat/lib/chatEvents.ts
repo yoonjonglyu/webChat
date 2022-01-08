@@ -34,6 +34,12 @@ class ChatEvents {
             room: room
         });
     }
+    leaveRoom(room: string) {
+        this.socket.emit('leave', {
+            socketIdx: this.socket.id,
+            room: room
+        });
+    }
     sendMessage(message: string, room: string) {
         this.socket.emit('send', {
             socketIdx: this.socket.id,
