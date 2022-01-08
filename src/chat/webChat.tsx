@@ -90,8 +90,10 @@ const WebChat: React.FC<WebChatProps> = (props) => {
                 step === 4 &&
                 <SendNickName />
             }
-            <ChatWindow socket={socket} />
-
+            {
+                step > 4 &&
+                <ChatWindow socket={socket} />
+            }
         </article >
     );
 }
