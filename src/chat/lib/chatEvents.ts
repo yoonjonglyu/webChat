@@ -102,6 +102,13 @@ class ChatEvents {
             }
         });
     }
+    receiveRoomHeadCount(handleCount: (data: { [key: string]: Array<string> }) => void) {
+        this.socket.on('headCount', (data: { [key: string]: Array<string> }) => {
+            if (this.socket.connected) {
+                handleCount(data);
+            }
+        });
+    }
 }
 
 export default ChatEvents;
