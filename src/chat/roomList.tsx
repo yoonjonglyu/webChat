@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Socket } from 'socket.io-client';
 
 import ChatEvents from './lib/chatEvents';
@@ -10,15 +10,19 @@ interface RoomListProps {
 }
 
 const RoomList: React.FC<RoomListProps> = ({ rooms, socket }) => {
+    const [headCount, setHeadCount] = useState<{ [key: string]: Array<string> }>({});
     const { handleRoom, handleStep } = useContext(ConfigContext);
     const Events = new ChatEvents(socket);
 
+    useEffect(() => {
+        Events.receiveRoomHeadCount(setHeadCount);
+        Events.getHeadCount();
+    }, []);
     const joinRoom = (room: string) => {
         Events.joinRoom(room);
         handleRoom(room);
         handleStep(5);
     }
-
     return (
         <article
             data-testid="room-list"
@@ -41,7 +45,7 @@ const RoomList: React.FC<RoomListProps> = ({ rooms, socket }) => {
                     margin: "0",
                     padding: 0,
                     listStyle: "none",
-                    
+
                 }}
             >
                 {
@@ -55,7 +59,7 @@ const RoomList: React.FC<RoomListProps> = ({ rooms, socket }) => {
                                 color: "whitesmoke",
                             }}
                         >
-                            {room}
+                            {room} ({headCount[room]?.length || 0})
                         </li>)
                 }
             </ul>

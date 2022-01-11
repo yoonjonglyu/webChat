@@ -29,8 +29,8 @@ describe('채팅방 리스트', () => {
         expect(screen.getByTestId('room-list')).toBeInTheDocument();
         expect(screen.getByText('참여 가능한 채팅방 목록')).toBeInTheDocument();
         expect(screen.getByTestId('rooms')).toBeInTheDocument();
-        expect(screen.getByText('채팅방#1')).toBeInTheDocument();
-        expect(screen.getByText('#3')).toBeInTheDocument();
+        expect(screen.getByText('채팅방#1 (0)')).toBeInTheDocument();
+        expect(screen.getByText('#3 (0)')).toBeInTheDocument();
     });
     test('socket', (done) => {
         render(
@@ -50,6 +50,6 @@ describe('채팅방 리스트', () => {
             expect(id).toBe(socket.id);
             done();
         });
-        fireEvent.click(screen.getByText('채팅방#1'));
+        fireEvent.click(screen.getByText('채팅방#1 (0)'));
     });
 });
