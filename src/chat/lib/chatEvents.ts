@@ -95,7 +95,7 @@ class ChatEvents {
             }
         });
     }
-    getHeadCount(room: string, handleCount: (data: Array<string>) => void) {
+    receiveHeadCount(room: string, handleCount: (data: Array<string>) => void) {
         this.socket.on('headCount', (data: { [key: string]: Array<string> }) => {
             if (this.socket.connected) {
                 handleCount(data[room]);
