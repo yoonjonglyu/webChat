@@ -82,7 +82,7 @@ class ChatEvents {
                     idx: '#system',
                     message: `${id} 님이 대화에 참여 하였습니다.`,
                 });
-                this.socket.emit('headCount');
+                this.getHeadCount();
             }
         });
         this.socket.on('leaveRoom', (id: string) => {
@@ -91,9 +91,12 @@ class ChatEvents {
                     idx: '#system',
                     message: `${id} 님이 대화에서 나갔습니다.`,
                 });
-                this.socket.emit('headCount');
+                this.getHeadCount();
             }
         });
+    }
+    getHeadCount() {
+        this.socket.emit('headCount');
     }
     receiveHeadCount(room: string, handleCount: (data: Array<string>) => void) {
         this.socket.on('headCount', (data: { [key: string]: Array<string> }) => {
