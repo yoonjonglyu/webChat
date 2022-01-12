@@ -64,6 +64,9 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
         if (room !== '') {
             Events.receiveHeadCount(room, setHeadCount);
         }
+        return () => {
+            setHeadCount([]);
+        }
     }, [room]);
     useEffect(() => {
         if (headCount.length > 0) {

@@ -16,13 +16,20 @@ const RoomList: React.FC<RoomListProps> = ({ rooms, socket }) => {
 
     useEffect(() => {
         Events.receiveRoomHeadCount(setHeadCount);
-        Events.getHeadCount();
+        const healthCheck = setInterval(() => Events.getHeadCount(), 1000);
+
+        return () => {
+            clearInterval(healthCheck);
+            setHeadCount({});
+        }
     }, []);
+
     const joinRoom = (room: string) => {
         Events.joinRoom(room);
         handleRoom(room);
         handleStep(5);
     }
+
     return (
         <article
             data-testid="room-list"

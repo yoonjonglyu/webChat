@@ -21,12 +21,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
     }>>([]);
 
     useEffect(() => {
-        setUserId(socket.id);
-    }, [chatLog]);
-
-    useEffect(() => {
         const Events = new ChatEvents(socket);
-
         Events.receiveMessages((msg: { idx: string, message: string }) => {
             setChatLog((arr) => [
                 ...arr,
@@ -36,6 +31,13 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 }
             ]);
         });
+
+        setUserId(socket.id);
+        
+        return () => {
+            setChatLog([]);
+            setUserId('')
+        }
     }, []);
 
     const Room: any = useRef(null);
