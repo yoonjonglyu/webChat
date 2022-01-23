@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface UserrMessageProps {
     message: string
@@ -7,7 +7,18 @@ interface UserrMessageProps {
 }
 
 const UserMessage: React.FC<UserrMessageProps> = ({ message, openImageModal, time }) => {
+    const [isHover, setIsHover] = useState(false);
+
+    const downloadImage = (image: string) => {
+        const imageLink = document.createElement("a");
+        imageLink.href = image;
+        imageLink.download = `이미지_${Date.now()}.png`;
+        imageLink.click();
+        imageLink.remove();
+    }
+
     const messageStyle: React.CSSProperties = {
+        display: "flex",
         maxWidth: "58%",
         padding: "8px",
         margin: "8px",
@@ -18,6 +29,7 @@ const UserMessage: React.FC<UserrMessageProps> = ({ message, openImageModal, tim
         borderRadius: "6px",
     };
     const boxStyle: React.CSSProperties = {
+        position: "relative",
         display: "flex",
         flex: "1",
         flexFlow: "row-reverse",
@@ -28,7 +40,9 @@ const UserMessage: React.FC<UserrMessageProps> = ({ message, openImageModal, tim
 
     return (
         <>
-            <p style={boxStyle}>
+            <p
+                style={boxStyle}
+            >
                 {
                     message.slice(0, 5) !== '@$IMG' ?
                         <span
@@ -37,13 +51,36 @@ const UserMessage: React.FC<UserrMessageProps> = ({ message, openImageModal, tim
                         >
                             {message}
                         </span > :
-                        <img
-                            data-testid="user-image"
-                            src={message.slice(5)}
-                            style={messageStyle}
-                            onClick={() => openImageModal(message.slice(5))}
-                            alt="전송된 이미지"
-                        />
+                        <>
+                            <img
+                                data-testid="user-image"
+                                src={message.slice(5)}
+                                style={messageStyle}
+                                onClick={() => openImageModal(message.slice(5))}
+                                onMouseEnter={() => setIsHover(true)}
+                                onMouseLeave={() => setIsHover(false)}
+                                alt="전송된 이미지"
+                            />
+                            {
+                                isHover &&
+                                <button
+                                    style={{
+                                        position: "absolute",
+                                        margin: "8px",
+                                        padding: "3px",
+                                        fontSize: "0.8rem",
+                                        color: "#cecece",
+                                        background: "rgb(255, 99, 71, 50%)",
+                                        border: "none",
+                                    }}
+                                    onMouseEnter={() => setIsHover(true)}
+                                    onMouseLeave={() => setIsHover(false)}
+                                    onClick={() => downloadImage(message.slice(5))}
+                                >
+                                    Download
+                                </button>
+                            }
+                        </>
                 }
                 <time
                     style={{
