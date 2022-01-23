@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import PartnerMessage from './partnerMessage';
 
@@ -31,5 +31,10 @@ describe('파트너 메시지', () => {
         expect(screen.getByTestId('partner-image')).toBeInTheDocument();
         expect(screen.getByAltText('전송된 이미지')).toBeInTheDocument();
         expect(screen.getByText('오후 12:23')).toBeInTheDocument();
+
+        fireEvent.mouseEnter(screen.getByTestId('user-image'));
+        expect(screen.getByText('Download')).toBeInTheDocument();
+        fireEvent.click(screen.getByText('Download'));
+
     });
 });
