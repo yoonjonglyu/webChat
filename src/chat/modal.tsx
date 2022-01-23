@@ -22,6 +22,7 @@ const Modal: React.FC<ModalProps> = () => {
                 width: "100%",
                 height: "100%",
                 background: "rgb(0,0,0, 0.5)",
+                zIndex: 99999999,
             }}
             onClick={closeModal}
         >
