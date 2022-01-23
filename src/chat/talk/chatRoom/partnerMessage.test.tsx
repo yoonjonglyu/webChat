@@ -32,7 +32,7 @@ describe('파트너 메시지', () => {
         expect(screen.getByAltText('전송된 이미지')).toBeInTheDocument();
         expect(screen.getByText('오후 12:23')).toBeInTheDocument();
 
-        fireEvent.mouseEnter(screen.getByTestId('user-image'));
+        fireEvent.mouseEnter(screen.getByTestId('partner-image'));
         expect(screen.getByText('Download')).toBeInTheDocument();
         fireEvent.click(screen.getByText('Download'));
 
