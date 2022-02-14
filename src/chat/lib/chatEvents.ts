@@ -124,7 +124,7 @@ class ChatEvents {
     emit(eventName: string, message: Object) {
         this.socket.emit(
             eventName,
-            this.cryptoKey !== undefined ?
+            this.cryptoKey.length > 0 ?
                 Crypto.AES.encrypt(JSON.stringify(message), this.cryptoKey).toString() :
                 message
         );
@@ -132,7 +132,7 @@ class ChatEvents {
     on(eventName: string, cb: any) {
         this.socket.on(
             eventName,
-            this.cryptoKey !== undefined ?
+            this.cryptoKey.length > 0 ?
                 (data: string) => cb(JSON.parse(
                     Crypto.AES.decrypt(data, this.cryptoKey).toString(Crypto.enc.Utf8)
                 )) :
