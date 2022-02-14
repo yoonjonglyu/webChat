@@ -1,10 +1,15 @@
 import { Socket } from "socket.io-client";
+import Crypto from 'crypto-js';
 
 class ChatEvents {
     socket: Socket;
-    constructor(socket: Socket) {
+    cryptoKey: string;
+
+    constructor(socket: Socket, cryptoKey?: string) {
         this.socket = socket;
+        this.cryptoKey = cryptoKey || 'goodTomato';
     }
+
     handleConnect(cb: VoidFunction) {
         this.socket.on('connect', () => {
             if (this.socket.connected) {
@@ -22,6 +27,7 @@ class ChatEvents {
             cb();
         });
     }
+
     getRooms(handleRooms: (data: Array<string>) => void) {
         this.socket.once('rooms', (data: Array<string>) => {
             handleRooms(data);
@@ -40,8 +46,9 @@ class ChatEvents {
             room: room
         });
     }
+
     sendMessage(message: string, room: string) {
-        this.socket.emit('send', {
+        this.emit('send', {
             socketIdx: this.socket.id,
             message: message,
             room: room
@@ -71,7 +78,7 @@ class ChatEvents {
             }
             reader.readAsDataURL(new Blob([data.message], { type: 'images/png' }));
         });
-        this.socket.on('receive', (data: { idx: string, message: string }) => {
+        this.on('receive', (data: { idx: string, message: string }) => {
             if (this.socket.connected) {
                 handleMessage(data);
             }
@@ -95,6 +102,7 @@ class ChatEvents {
             }
         });
     }
+
     getHeadCount() {
         this.socket.emit('headCount');
     }
@@ -111,6 +119,25 @@ class ChatEvents {
                 handleCount(data);
             }
         });
+    }
+
+    emit(eventName: string, message: Object) {
+        this.socket.emit(
+            eventName,
+            this.cryptoKey !== undefined ?
+                Crypto.AES.encrypt(JSON.stringify(message), this.cryptoKey).toString() :
+                message
+        );
+    }
+    on(eventName: string, cb: any) {
+        this.socket.on(
+            eventName,
+            this.cryptoKey !== undefined ?
+                (data: string) => cb(JSON.parse(
+                    Crypto.AES.decrypt(data, this.cryptoKey).toString(Crypto.enc.Utf8)
+                )) :
+                cb
+        )
     }
 }
 
