@@ -8,12 +8,14 @@ import RootContextProvider from './store';
 interface TomatoProps {
     url: string
     imageSize?: number
+    secretKey?: string
 }
 
 const Tomato: React.FC<TomatoProps> = (props) => {
     const {
         url,
-        imageSize
+        imageSize,
+        secretKey,
     } = props;
     const [socket, setSocket] = useState<Socket | null>(null);
     useEffect(() => {
@@ -34,7 +36,8 @@ const Tomato: React.FC<TomatoProps> = (props) => {
                     <WebChat
                         socket={socket}
                         config={{
-                            imageSize
+                            imageSize,
+                            secretKey,
                         }}
                     />
                 </RootContextProvider>

@@ -2,11 +2,13 @@ import React, { createContext, useState } from 'react';
 
 export const ConfigContext = createContext({
   step: 0,
-  handleStep: (step: number) => {},
+  handleStep: (step: number) => { },
   room: "",
   handleRoom: (room: string) => { },
   imageSize: 1,
   handleImageSize: (imgsize: number) => { },
+  secretKey: '',
+  handleSecretKey: (secretKey: string) => { },
 });
 
 const ConfigContextProvider: React.FC = ({ children }) => {
@@ -18,6 +20,10 @@ const ConfigContextProvider: React.FC = ({ children }) => {
   const handleImageSize = (imgsize: number) => {
     if (imageSize > 0) setImageSize(Math.floor(imgsize));
   }
+  const [secretKey, setSecretKey] = useState('');
+  const handleSecretKey = (secretKey: string) => {
+    if (secretKey.length > 0) setSecretKey(secretKey);
+  }
 
   return (
     <ConfigContext.Provider
@@ -27,7 +33,9 @@ const ConfigContextProvider: React.FC = ({ children }) => {
         room,
         handleRoom,
         imageSize,
-        handleImageSize
+        handleImageSize,
+        secretKey,
+        handleSecretKey,
       }}
     >
       {children}

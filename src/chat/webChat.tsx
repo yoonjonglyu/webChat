@@ -17,6 +17,7 @@ interface WebChatProps {
 }
 interface ConfigProps {
     imageSize?: number
+    secretKey?: string
 }
 
 
