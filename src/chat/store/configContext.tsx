@@ -5,7 +5,7 @@ export const ConfigContext = createContext({
   handleStep: (step: number) => {},
   room: "",
   handleRoom: (room: string) => { },
-  imageSize: 1 * 1024 * 1024,
+  imageSize: 1,
   handleImageSize: (imgsize: number) => { },
 });
 
@@ -14,9 +14,9 @@ const ConfigContextProvider: React.FC = ({ children }) => {
   const handleStep = (step: number) => setStep(step);
   const [room, setRoom] = useState('');
   const handleRoom = (room: string) => setRoom(room);
-  const [imageSize, setImageSize] = useState(1 * 1024 * 1024);
+  const [imageSize, setImageSize] = useState(1);
   const handleImageSize = (imgsize: number) => {
-    if (imageSize > 0) setImageSize(Math.floor(imgsize * 1024 * 1024));
+    if (imageSize > 0) setImageSize(Math.floor(imgsize));
   }
 
   return (

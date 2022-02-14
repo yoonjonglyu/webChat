@@ -34,9 +34,10 @@ const SendPoto: React.FC<SendPotoProps> = ({ socket }) => {
         const file: FileList | null = e.target.files;
         if (file !== null) {
             const Events = new ChatEvents(socket);
-            const result = Events.sendImage(file[0], room, imageSize);
+            const MB = 1024 * 1024;
+            const result = Events.sendImage(file[0], room, imageSize * MB);
             if (!result) {
-                openModal(`${imageSize / (1024 * 1024)}MB 이하의 이미지 파일만 전송 할 수 있습니다.`);
+                openModal(`${imageSize}MB 이하의 이미지 파일만 전송 할 수 있습니다.`);
             }
         }
         e.target.value = '';
