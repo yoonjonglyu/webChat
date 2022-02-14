@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Socket } from 'socket.io-client';
 
 import ChatMessage from './chatMessage';
 
 import ChatEvents from '../../lib/chatEvents';
+import { ConfigContext } from '../../store/configContext';
 
 interface ChatRoomProps {
     socket: Socket
@@ -19,9 +20,10 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         message: string
         time: string
     }>>([]);
+    const { secretKey } = useContext(ConfigContext);
 
     useEffect(() => {
-        const Events = new ChatEvents(socket);
+        const Events = new ChatEvents(socket, secretKey);
         Events.receiveMessages((msg: { idx: string, message: string }) => {
             setChatLog((arr) => [
                 ...arr,
@@ -33,7 +35,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         });
 
         setUserId(socket.id);
-        
+
         return () => {
             setChatLog([]);
             setUserId('')

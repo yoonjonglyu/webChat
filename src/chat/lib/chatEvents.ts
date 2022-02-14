@@ -7,7 +7,7 @@ class ChatEvents {
 
     constructor(socket: Socket, cryptoKey?: string) {
         this.socket = socket;
-        this.cryptoKey = cryptoKey || 'goodTomato';
+        this.cryptoKey = cryptoKey || '';
     }
 
     handleConnect(cb: VoidFunction) {
