@@ -1,11 +1,9 @@
-import * as IsModal from './modal/isModal';
-import * as ModalCotents from './modal/modalContents';
-import * as Step from './system/step';
+import Modal from './modal';
+import System from './system';
 
 const RootState = [
-    IsModal,
-    ModalCotents,
-    Step,
+    ...Modal,
+    ...System,
 ];
 
 
