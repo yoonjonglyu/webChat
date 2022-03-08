@@ -4,7 +4,7 @@ import SystemMessage from './systemMessage';
 import PartnerMessage from './partnerMessage';
 import UserMessage from './userMessage';
 
-import { ModalContext } from '../../store/modalContext';
+import { StoreContext } from '../../store/configureStore';
 
 interface ChatMessageProps {
     messages: Array<{
@@ -20,9 +20,9 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
         messages,
         userId
     } = props;
-    const { handleIsModal, handleModal } = useContext(ModalContext);
+    const { handleIsModal, handleModalContents } = useContext(StoreContext);
     const openImageModal = (src: string) => {
-        handleModal(
+        handleModalContents(
             <img
                 src={src}
                 style={{

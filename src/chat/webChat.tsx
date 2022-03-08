@@ -9,7 +9,7 @@ import Modal from './modal';
 
 import ChatEvents from './lib/chatEvents';
 import { ConfigContext } from './store/configContext';
-import { ModalContext } from './store/modalContext';
+import { StoreContext } from './store/configureStore';
 
 interface WebChatProps {
     socket: Socket
@@ -26,7 +26,7 @@ const WebChat: React.FC<WebChatProps> = (props) => {
         socket,
         config
     } = props;
-    const { isModal } = useContext(ModalContext);
+    const { isModal } = useContext(StoreContext);
     const { handleRoom, handleImageSize, handleSecretKey, step, handleStep } = useContext(ConfigContext);
     useEffect(() => {
         if (config?.imageSize) handleImageSize(config.imageSize);

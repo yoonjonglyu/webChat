@@ -5,7 +5,7 @@ import PotoIcon from '../../assets/poto.png';
 
 import ChatEvents from '../../lib/chatEvents';
 import { ConfigContext } from '../../store/configContext';
-import { ModalContext } from '../../store/modalContext';
+import { StoreContext } from '../../store/configureStore';
 
 interface SendPotoProps {
     socket: Socket
@@ -13,9 +13,9 @@ interface SendPotoProps {
 
 const SendPoto: React.FC<SendPotoProps> = ({ socket }) => {
     const { room, imageSize } = useContext(ConfigContext);
-    const { handleIsModal, handleModal } = useContext(ModalContext);
+    const { handleIsModal, handleModalContents } = useContext(StoreContext);
     const openModal = (message: string) => {
-        handleModal(
+        handleModalContents(
             <h3
                 style={{
                     width: "80%",
