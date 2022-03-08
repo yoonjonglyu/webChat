@@ -4,7 +4,6 @@ import { Socket } from 'socket.io-client';
 import UserIcon from '../../assets/user.png';
 
 import ChatEvents from '../../lib/chatEvents';
-import { ConfigContext } from '../../store/configContext';
 import { StoreContext } from '../../store/configureStore';
 
 interface ChatHeadProps {
@@ -16,8 +15,13 @@ const ChatHead: React.FC<ChatHeadProps> = (props) => {
         socket
     } = props;
     const [headCount, setHeadCount] = useState<Array<string>>([]);
-    const { room, handleStep, handleRoom } = useContext(ConfigContext);
-    const { handleIsModal, handleModalContents } = useContext(StoreContext);
+    const {
+        room,
+        handleStep,
+        handleRoom,
+        handleIsModal,
+        handleModalContents
+    } = useContext(StoreContext);
     const Events = new ChatEvents(socket);
 
     const headCountModal = () => {

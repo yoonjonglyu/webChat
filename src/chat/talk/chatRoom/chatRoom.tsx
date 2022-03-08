@@ -4,7 +4,7 @@ import { Socket } from 'socket.io-client';
 import ChatMessage from './chatMessage';
 
 import ChatEvents from '../../lib/chatEvents';
-import { ConfigContext } from '../../store/configContext';
+import { StoreContext } from '../../store/configureStore';
 
 interface ChatRoomProps {
     socket: Socket
@@ -20,7 +20,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
         message: string
         time: string
     }>>([]);
-    const { secretKey } = useContext(ConfigContext);
+    const { secretKey } = useContext(StoreContext);
 
     useEffect(() => {
         const Events = new ChatEvents(socket, secretKey);
