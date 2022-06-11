@@ -63,11 +63,11 @@ const WebChat: React.FC<WebChatProps> = (props) => {
       }}>
       {isModal && <Modal />}
       {step < ChatStatus.setNickName && <Loading state={step} />}
-      {step === ChatStatus.setNickName && <SendNickName />}
+      {step === ChatStatus.setNickName && <SendNickName rooms={rooms} />}
       {step === ChatStatus.roomList && (
         <RoomList rooms={rooms} socket={socket} />
       )}
-      {step > ChatStatus.chatroom && <ChatWindow socket={socket} />}
+      {step === ChatStatus.chatroom && <ChatWindow socket={socket} />}
     </article>
   );
 };

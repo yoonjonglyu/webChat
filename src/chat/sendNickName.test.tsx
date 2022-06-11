@@ -6,7 +6,7 @@ import SendNickName from './sendNickName';
 describe('sendNickName', () => {
     test('render', () => {
         render(
-            <SendNickName />
+            <SendNickName rooms={[]} />
         );
 
         expect(screen.getByText('대화에 사용하실 닉네임을 입력해주세요.')).toBeInTheDocument();
