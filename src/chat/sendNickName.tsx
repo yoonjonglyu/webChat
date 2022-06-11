@@ -17,7 +17,11 @@ const SendNickName: React.FC<SendNickNameProps> = ({ rooms }) => {
   const sendNickName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(nickName, rooms);
-    handleStep(ChatStatus.roomList);
+    handleStep(checkRoomListAvail);
+
+    function checkRoomListAvail() {
+      return rooms.length === 1 ? ChatStatus.chatroom : ChatStatus.roomList;
+    }
   };
 
   return (
