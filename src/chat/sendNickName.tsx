@@ -4,23 +4,22 @@ import { StoreContext } from './store/configureStore';
 
 import ChatStatus from './constants/chatStatus';
 
-interface SendNickNameProps {
-  rooms: Array<string>;
-}
+interface SendNickNameProps {}
 
-const SendNickName: React.FC<SendNickNameProps> = ({ rooms }) => {
+const SendNickName: React.FC<SendNickNameProps> = () => {
   const [nickName, setNickName] = useState('');
-  const { handleStep } = useContext(StoreContext);
+  const { handleStep, roomList } = useContext(StoreContext);
+
   const handleNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.target.value);
   };
   const sendNickName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(nickName, rooms);
+    console.log(nickName, roomList);
     handleStep(checkRoomListAvail);
 
     function checkRoomListAvail() {
-      return rooms.length === 1 ? ChatStatus.chatroom : ChatStatus.roomList;
+      return roomList.length === 1 ? ChatStatus.chatroom : ChatStatus.roomList;
     }
   };
 

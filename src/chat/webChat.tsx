@@ -23,19 +23,25 @@ interface ConfigProps {
 
 const WebChat: React.FC<WebChatProps> = (props) => {
   const { socket, config } = props;
-  const { isModal, handleImageSize, handleSecretKey, step, handleStep } =
-    useContext(StoreContext);
+  const {
+    isModal,
+    handleImageSize,
+    handleSecretKey,
+    step,
+    handleStep,
+    roomList,
+    handleRoomList,
+  } = useContext(StoreContext);
   useEffect(() => {
     if (config?.imageSize) handleImageSize(config.imageSize);
     if (config?.secretKey) handleSecretKey(config.secretKey);
   }, []);
 
   const Events = new ChatEvents(socket);
-  const [rooms, setRooms] = useState<Array<string>>([]);
   useEffect(() => {
     Events.handleConnect(() => {
       handleStep(ChatStatus.waitRoom);
-      Events.getRooms(setRooms);
+      Events.getRooms(handleRoomList);
     });
     Events.handleDisConnect(() => {
       handleStep(ChatStatus.error);
@@ -48,8 +54,8 @@ const WebChat: React.FC<WebChatProps> = (props) => {
     };
   }, [socket]);
   useEffect(() => {
-    if (rooms.length > 0) handleStep(ChatStatus.setNickName);
-  }, [rooms]);
+    if (roomList.length > 0) handleStep(ChatStatus.setNickName);
+  }, [roomList]);
 
   return (
     <article
@@ -63,9 +69,9 @@ const WebChat: React.FC<WebChatProps> = (props) => {
       }}>
       {isModal && <Modal />}
       {step < ChatStatus.setNickName && <Loading state={step} />}
-      {step === ChatStatus.setNickName && <SendNickName rooms={rooms} />}
+      {step === ChatStatus.setNickName && <SendNickName />}
       {step === ChatStatus.roomList && (
-        <RoomList rooms={rooms} socket={socket} />
+        <RoomList rooms={roomList} socket={socket} />
       )}
       {step === ChatStatus.chatroom && <ChatWindow socket={socket} />}
     </article>
