@@ -8,15 +8,18 @@ interface SendNickNameProps {}
 
 const SendNickName: React.FC<SendNickNameProps> = () => {
   const [nickName, setNickName] = useState('');
-  const { handleStep, roomList } = useContext(StoreContext);
+  const { handleStep, roomList, userInfo, handleUserInfo } =
+    useContext(StoreContext);
 
   const handleNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.target.value);
   };
   const sendNickName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(nickName, roomList);
-    handleStep(checkRoomListAvail);
+    if (nickName.length > 0) {
+      handleUserInfo({ ...userInfo, nickName });
+      handleStep(checkRoomListAvail);
+    }
 
     function checkRoomListAvail() {
       return roomList.length === 1 ? ChatStatus.chatroom : ChatStatus.roomList;
