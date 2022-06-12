@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 export const initState = {
     modalContents: '',
-    handleModalContents: (data: React.ReactNode) => { }
+    handleModalContents: (contents: React.ReactNode) => { }
 };
 
 export function setContext() {
-    const [modalContents, setModalContents] = useState<any>();
-    const handleModalContents = (data: React.ReactNode) => setModalContents(data);
+    const [modalContents, setModalContents] = useState<React.ReactNode>();
+    const handleModalContents = (contents: React.ReactNode) => setModalContents(contents);
 
     return {
         modalContents,

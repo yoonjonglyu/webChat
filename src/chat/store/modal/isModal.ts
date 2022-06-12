@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 export const initState = {
     isModal: false,
-    handleIsModal: (data: boolean) => { },
+    handleIsModal: (flag: boolean) => { },
 };
 
 export function setContext(){
     const [isModal, setisModal] = useState(false);
-    const handleIsModal = (data: boolean) => setisModal(data);
+    const handleIsModal = (flag: boolean) => setisModal(flag);
 
     return {
         isModal,
